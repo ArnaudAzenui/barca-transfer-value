@@ -29,6 +29,13 @@ The repository contains the code, the hand-curated tables and the outputs, not t
   capology.com. To rebuild them, save the club *Payrolls* pages and any season *Salaries* pages from capology.com
   into `data/raw/capology/`, then re-extract them. Without them, wages fall back to `data/curated/wages_reported.csv`.
 
+## Hosting the dashboard (Vercel)
+
+`python -m src.build_dashboard` also writes a stand-alone `site/index.html`. `vercel.json` tells Vercel to serve the
+`site/` folder as-is: no build step, no install. Import this GitHub repo at https://vercel.com/new and every push to
+`main` redeploys automatically. Pages send `noindex` so search engines skip them. Vercel production URLs are public
+unless you turn on Deployment Protection, so check what the dashboard shows (e.g. wage estimates) before sharing the link.
+
 ## Method
 
 | Step | File | What it does |
