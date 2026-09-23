@@ -1,0 +1,55 @@
+# ROUGH gross annual wage estimates (EUR millions / season) averaged over each player's Barça contract.
+# Compiled from memory of press reports and Capology-style estimates -> LOW precision by design.
+# They are only used for the "fees + wages" sensitivity check. Replace with better figures if you have them;
+# any signing not listed gets an imputed wage (see src/costs.py).
+player,gross_wage_eur_m,confidence
+David Villa,12,low
+Javier Mascherano,10,low
+Adriano,5,low
+Ibrahim Afellay,3,low
+Cesc Fàbregas,14,low
+Alexis Sánchez,10,low
+Alex Song,8,low
+Jordi Alba,10,low
+Neymar,20,low
+Marc-André ter Stegen,12,low
+Claudio Bravo,5,low
+Ivan Rakitic,10,low
+Luis Suárez,20,low
+Jérémy Mathieu,6,low
+Thomas Vermaelen,7,low
+Douglas,2,low
+Arda Turan,12,low
+Aleix Vidal,6,low
+Denis Suárez,5,low
+Lucas Digne,5,low
+Samuel Umtiti,12,low
+André Gomes,8,low
+Jasper Cillessen,5,low
+Paco Alcácer,7,low
+Nélson Semedo,8,low
+Paulinho,12,low
+Ousmane Dembélé,20,low
+Gerard Deulofeu,4,low
+Philippe Coutinho,25,low
+Yerry Mina,4,low
+Arthur Melo,8,low
+Clément Lenglet,10,low
+Malcom,6,low
+Arturo Vidal,14,low
+Frenkie de Jong,25,low
+Antoine Griezmann,33,low
+Neto,6,low
+Junior Firpo,5,low
+Pedri,8,low
+Martin Braithwaite,4,low
+Miralem Pjanić,16,low
+Francisco Trincão,5,low
+Sergiño Dest,6,low
+Ferran Torres,12,low
+Raphinha,15,low
+Robert Lewandowski,25,low
+Jules Koundé,14,low
+Dani Olmo,16,low
+Vitor Roque,5,low
+Joan García,8,low

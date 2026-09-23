@@ -1,0 +1,4 @@
+# Manual fixes applied after loading. action: drop | fee (sets fee_eur_m). signing_season = season start year.
+player,signing_season,action,fee_eur_m,note
+Emerson Royal,2018,drop,,Two-stage deal (2019 + 2021 buy-back of Betis' half) - replaced by one row in missing_signings.csv
+Emerson Royal,2021,drop,,see above

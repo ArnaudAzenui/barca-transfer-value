@@ -1,0 +1,22 @@
+# Euro-area HICP (consumer price inflation), annual average rate of change, %.
+# Approximate published Eurostat figures; edit if you have the exact series. Used only for the "Today's € (CPI)" view.
+# A season is deflated with the price level of the calendar year it starts in (the summer window).
+year,hicp_rate_pct
+2008,3.3
+2009,0.3
+2010,1.6
+2011,2.7
+2012,2.5
+2013,1.4
+2014,0.4
+2015,0.2
+2016,0.2
+2017,1.5
+2018,1.8
+2019,1.2
+2020,0.3
+2021,2.6
+2022,8.4
+2023,5.4
+2024,2.4
+2025,2.1

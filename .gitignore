@@ -1,0 +1,22 @@
+# --- large / third-party raw data (download it yourself; see README) ---
+*.zip
+data/raw/
+data/processed/
+
+# --- Capology-derived tables -------------------------------------------
+# These are copied from capology.com. Keep them out of a PUBLIC repo unless
+# Capology's terms allow redistribution. For a private repo you can delete
+# these two lines to commit them.
+data/curated/capology_*.csv
+
+# --- Python / Jupyter ---------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# --- OS / editors -------------------------------------------------------
+.DS_Store
+.vscode/
+.idea/

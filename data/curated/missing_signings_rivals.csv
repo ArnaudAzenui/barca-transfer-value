@@ -1,0 +1,27 @@
+# Paid signings by Real Madrid (418) and Atlético (13) from 2010/11 on that are missing from the dataset's transfer
+# table (as for Barça: players whose careers ended outside the tracked leagues). Transfermarkt-style fees, EUR m.
+club_id,player_id,player,signing_date,from_club,fee_eur_m,exit_date,exit_to,sale_fee_eur_m,loaned_out_seasons,loan_income_eur_m,confidence
+418,35664,Mesut Özil,2010-08-17,Werder Bremen,18,2013-09-02,Arsenal,47,,0,high
+418,29401,Sami Khedira,2010-08-06,VfB Stuttgart,14,2015-07-01,Juventus,0,,0,high
+418,9828,Ricardo Carvalho,2010-08-10,Chelsea,8,2013-06-30,AS Monaco,0,,0,medium
+418,33648,Fábio Coentrão,2011-07-05,Benfica,30,2019-06-30,Rio Ave,0,2015;2017,0,medium
+418,31095,Nuri Sahin,2011-07-01,Borussia Dortmund,10,2014-06-30,Borussia Dortmund,7,2012;2013,0,low
+418,39381,Gareth Bale,2013-09-01,Tottenham,101,2022-06-30,Los Angeles FC,0,2020,0,high
+418,59344,Asier Illarramendi,2013-07-01,Real Sociedad,32.2,2015-07-01,Real Sociedad,15,,0,high
+418,316264,Martin Ødegaard,2015-01-22,Strømsgodset,3,2021-08-20,Arsenal,35,2016;2017;2018;2019,0,medium
+418,27486,Kiko Casilla,2015-07-15,Espanyol,6,2019-01-17,Leeds,0,,0,medium
+418,50202,Eden Hazard,2019-07-01,Chelsea,115,2023-06-30,Without Club,0,,0,high
+13,54928,Diego Godín,2010-08-04,Villarreal,8,2019-06-30,Inter,0,,0,high
+13,21725,Filipe Luís,2010-08-01,Deportivo,12,2014-07-01,Chelsea,20,,0,high
+13,21725,Filipe Luís,2015-07-28,Chelsea,16,2019-06-30,Flamengo,0,,0,high
+13,37337,Mario Suárez,2010-07-01,RCD Mallorca,2.6,2015-07-01,Fiorentina,15,,0,medium
+13,21369,Arda Turan,2011-08-01,Galatasaray,12,2015-07-06,Barcelona,34,,0,high
+13,16635,Juanfran Torres,2011-01-01,CA Osasuna,4,2019-06-30,São Paulo,0,,0,medium
+13,22969,Gabi,2011-07-01,Real Zaragoza,3,2018-06-30,Al-Sadd,0,,0,medium
+13,7980,David Villa,2013-07-12,Barcelona,5.1,2014-06-30,New York City FC,0,,0,high
+13,34572,Mario Mandzukic,2014-07-10,Bayern Munich,22,2015-06-22,Juventus,19,,0,high
+13,74418,Jackson Martínez,2015-07-15,FC Porto,35,2016-02-03,Guangzhou Evergrande,42,,0,high
+13,76061,Sime Vrsaljko,2016-07-20,Sassuolo,16,2022-07-01,Olympiacos,0,2018,0,medium
+13,75442,Nico Gaitán,2016-07-19,Benfica,25,2018-02-01,Dalian Yifang,18,,0,low
+13,44779,Diego Costa,2018-01-01,Chelsea,60,2020-12-29,Without Club,0,,0,medium
+13,36371,Nikola Kalinic,2018-08-01,AC Milan,14.5,2021-06-30,Hellas Verona,0,2019;2020,0,low

@@ -1,0 +1,472 @@
+{
+  "headline": {
+    "basis": "football",
+    "basis_label": "Today's football \u20ac",
+    "market_model": {
+      "n": 7607,
+      "r2": 0.671,
+      "sigma_log": 0.781
+    },
+    "market_model_all_leagues": {
+      "n": 92543,
+      "r2": 0.726,
+      "sigma_log": 0.803
+    },
+    "market_premium": 1.25,
+    "use_seasons": 5,
+    "trophy_beta": 0.1521,
+    "trophy_beta_se": 0.0337,
+    "club_model": {
+      "n": 59,
+      "r2": 0.224,
+      "intercept_m": 42.34,
+      "slope": 0.188
+    },
+    "n_signings": 59,
+    "clubs": {
+      "Barcelona": {
+        "signings": 59,
+        "spent_m": 3043.7,
+        "recovered_m": 1710.5,
+        "perf_value_m": 2525.9,
+        "total_balance_m": 1192.7,
+        "wages_m": 2769.4,
+        "return_per_eur_total_cost": 0.729,
+        "balance_per_eur": 0.392,
+        "median_balance_m": 5.5,
+        "good_share": 0.441,
+        "bad_share": 0.203,
+        "big_money": 16,
+        "big_money_bad": 7,
+        "decisions_rated": 59,
+        "overpaid_at_signing_share": 0.068,
+        "median_fee_to_fair_at_signing": 1.449,
+        "median_fee_to_tm_value": 0.867
+      },
+      "Real Madrid": {
+        "signings": 56,
+        "spent_m": 2742.1,
+        "recovered_m": 1728.8,
+        "perf_value_m": 2635.3,
+        "total_balance_m": 1622.0,
+        "wages_m": 3064.9,
+        "return_per_eur_total_cost": 0.752,
+        "balance_per_eur": 0.592,
+        "median_balance_m": 8.0,
+        "good_share": 0.536,
+        "bad_share": 0.25,
+        "big_money": 15,
+        "big_money_bad": 7,
+        "decisions_rated": 56,
+        "overpaid_at_signing_share": 0.036,
+        "median_fee_to_fair_at_signing": 1.114,
+        "median_fee_to_tm_value": 0.843
+      },
+      "Atl\u00e9tico Madrid": {
+        "signings": 80,
+        "spent_m": 2244.7,
+        "recovered_m": 1680.6,
+        "perf_value_m": 2049.3,
+        "total_balance_m": 1485.1,
+        "wages_m": 2066.2,
+        "return_per_eur_total_cost": 0.865,
+        "balance_per_eur": 0.662,
+        "median_balance_m": 7.6,
+        "good_share": 0.562,
+        "bad_share": 0.113,
+        "big_money": 8,
+        "big_money_bad": 3,
+        "decisions_rated": 80,
+        "overpaid_at_signing_share": 0.113,
+        "median_fee_to_fair_at_signing": 1.043,
+        "median_fee_to_tm_value": 0.8
+      }
+    },
+    "clubs_2013": {
+      "Atl\u00e9tico Madrid": {
+        "signings": 71,
+        "spent_m": 1953.0,
+        "recovered_m": 1352.6,
+        "perf_value_m": 1497.4,
+        "total_balance_m": 896.9,
+        "wages_m": 1437.2,
+        "return_per_eur_total_cost": 0.841,
+        "balance_per_eur": 0.459,
+        "median_balance_m": 5.5,
+        "good_share": 0.521,
+        "bad_share": 0.113,
+        "big_money": 7,
+        "big_money_bad": 3,
+        "decisions_rated": 71,
+        "overpaid_at_signing_share": 0.113,
+        "median_fee_to_fair_at_signing": 1.097,
+        "median_fee_to_tm_value": 0.8
+      },
+      "Barcelona": {
+        "signings": 51,
+        "spent_m": 2535.3,
+        "recovered_m": 1503.3,
+        "perf_value_m": 2041.6,
+        "total_balance_m": 1009.6,
+        "wages_m": 2024.2,
+        "return_per_eur_total_cost": 0.777,
+        "balance_per_eur": 0.398,
+        "median_balance_m": 4.8,
+        "good_share": 0.451,
+        "bad_share": 0.196,
+        "big_money": 12,
+        "big_money_bad": 6,
+        "decisions_rated": 51,
+        "overpaid_at_signing_share": 0.078,
+        "median_fee_to_fair_at_signing": 1.6,
+        "median_fee_to_tm_value": 0.978
+      },
+      "Real Madrid": {
+        "signings": 46,
+        "spent_m": 2225.8,
+        "recovered_m": 1298.0,
+        "perf_value_m": 2156.7,
+        "total_balance_m": 1228.9,
+        "wages_m": 2195.7,
+        "return_per_eur_total_cost": 0.781,
+        "balance_per_eur": 0.552,
+        "median_balance_m": 8.0,
+        "good_share": 0.543,
+        "bad_share": 0.217,
+        "big_money": 12,
+        "big_money_bad": 5,
+        "decisions_rated": 46,
+        "overpaid_at_signing_share": 0.022,
+        "median_fee_to_fair_at_signing": 1.319,
+        "median_fee_to_tm_value": 0.879
+      }
+    },
+    "premium_tests": {
+      "vs_market_value": {
+        "n": 139,
+        "Barcelona": {
+          "premium_pct": 7.9,
+          "ci_pct": [
+            -11.6,
+            31.8
+          ],
+          "p": 0.45
+        },
+        "Real Madrid": {
+          "premium_pct": -2.6,
+          "ci_pct": [
+            -20.9,
+            19.9
+          ],
+          "p": 0.799
+        }
+      },
+      "vs_stats_fair_fee": {
+        "n": 103,
+        "Barcelona": {
+          "premium_pct": 31.8,
+          "ci_pct": [
+            -2.8,
+            78.6
+          ],
+          "p": 0.075
+        },
+        "Real Madrid": {
+          "premium_pct": -8.9,
+          "ci_pct": [
+            -35.9,
+            29.5
+          ],
+          "p": 0.602
+        }
+      }
+    },
+    "wage_curve": {
+      "b_mv": 0.644,
+      "b_age": 0.184,
+      "r2_within": null,
+      "n": 117,
+      "n_actual_matched": 117
+    },
+    "wage_validation": [
+      {
+        "season": 2017,
+        "n": 22,
+        "corr_log": 0.739,
+        "median_abs_pct_err": 40.9
+      },
+      {
+        "season": 2018,
+        "n": 23,
+        "corr_log": 0.85,
+        "median_abs_pct_err": 39.4
+      },
+      {
+        "season": 2020,
+        "n": 19,
+        "corr_log": 0.751,
+        "median_abs_pct_err": 31.4
+      }
+    ]
+  },
+  "by_basis": {
+    "football": {
+      "basis": "football",
+      "basis_label": "Today's football \u20ac",
+      "market_model": {
+        "n": 7607,
+        "r2": 0.671,
+        "sigma_log": 0.781
+      },
+      "market_model_all_leagues": {
+        "n": 92543,
+        "r2": 0.726,
+        "sigma_log": 0.803
+      },
+      "market_premium": 1.25,
+      "use_seasons": 5,
+      "trophy_beta": 0.1521,
+      "trophy_beta_se": 0.0337,
+      "club_model": {
+        "n": 59,
+        "r2": 0.224,
+        "intercept_m": 42.34,
+        "slope": 0.188
+      },
+      "n_signings": 59,
+      "clubs": {
+        "Barcelona": {
+          "signings": 59,
+          "spent_m": 3043.7,
+          "recovered_m": 1710.5,
+          "perf_value_m": 2525.9,
+          "total_balance_m": 1192.7,
+          "wages_m": 2769.4,
+          "return_per_eur_total_cost": 0.729,
+          "balance_per_eur": 0.392,
+          "median_balance_m": 5.5,
+          "good_share": 0.441,
+          "bad_share": 0.203,
+          "big_money": 16,
+          "big_money_bad": 7,
+          "decisions_rated": 59,
+          "overpaid_at_signing_share": 0.068,
+          "median_fee_to_fair_at_signing": 1.449,
+          "median_fee_to_tm_value": 0.867
+        },
+        "Real Madrid": {
+          "signings": 56,
+          "spent_m": 2742.1,
+          "recovered_m": 1728.8,
+          "perf_value_m": 2635.3,
+          "total_balance_m": 1622.0,
+          "wages_m": 3064.9,
+          "return_per_eur_total_cost": 0.752,
+          "balance_per_eur": 0.592,
+          "median_balance_m": 8.0,
+          "good_share": 0.536,
+          "bad_share": 0.25,
+          "big_money": 15,
+          "big_money_bad": 7,
+          "decisions_rated": 56,
+          "overpaid_at_signing_share": 0.036,
+          "median_fee_to_fair_at_signing": 1.114,
+          "median_fee_to_tm_value": 0.843
+        },
+        "Atl\u00e9tico Madrid": {
+          "signings": 80,
+          "spent_m": 2244.7,
+          "recovered_m": 1680.6,
+          "perf_value_m": 2049.3,
+          "total_balance_m": 1485.1,
+          "wages_m": 2066.2,
+          "return_per_eur_total_cost": 0.865,
+          "balance_per_eur": 0.662,
+          "median_balance_m": 7.6,
+          "good_share": 0.562,
+          "bad_share": 0.113,
+          "big_money": 8,
+          "big_money_bad": 3,
+          "decisions_rated": 80,
+          "overpaid_at_signing_share": 0.113,
+          "median_fee_to_fair_at_signing": 1.043,
+          "median_fee_to_tm_value": 0.8
+        }
+      },
+      "clubs_2013": {
+        "Atl\u00e9tico Madrid": {
+          "signings": 71,
+          "spent_m": 1953.0,
+          "recovered_m": 1352.6,
+          "perf_value_m": 1497.4,
+          "total_balance_m": 896.9,
+          "wages_m": 1437.2,
+          "return_per_eur_total_cost": 0.841,
+          "balance_per_eur": 0.459,
+          "median_balance_m": 5.5,
+          "good_share": 0.521,
+          "bad_share": 0.113,
+          "big_money": 7,
+          "big_money_bad": 3,
+          "decisions_rated": 71,
+          "overpaid_at_signing_share": 0.113,
+          "median_fee_to_fair_at_signing": 1.097,
+          "median_fee_to_tm_value": 0.8
+        },
+        "Barcelona": {
+          "signings": 51,
+          "spent_m": 2535.3,
+          "recovered_m": 1503.3,
+          "perf_value_m": 2041.6,
+          "total_balance_m": 1009.6,
+          "wages_m": 2024.2,
+          "return_per_eur_total_cost": 0.777,
+          "balance_per_eur": 0.398,
+          "median_balance_m": 4.8,
+          "good_share": 0.451,
+          "bad_share": 0.196,
+          "big_money": 12,
+          "big_money_bad": 6,
+          "decisions_rated": 51,
+          "overpaid_at_signing_share": 0.078,
+          "median_fee_to_fair_at_signing": 1.6,
+          "median_fee_to_tm_value": 0.978
+        },
+        "Real Madrid": {
+          "signings": 46,
+          "spent_m": 2225.8,
+          "recovered_m": 1298.0,
+          "perf_value_m": 2156.7,
+          "total_balance_m": 1228.9,
+          "wages_m": 2195.7,
+          "return_per_eur_total_cost": 0.781,
+          "balance_per_eur": 0.552,
+          "median_balance_m": 8.0,
+          "good_share": 0.543,
+          "bad_share": 0.217,
+          "big_money": 12,
+          "big_money_bad": 5,
+          "decisions_rated": 46,
+          "overpaid_at_signing_share": 0.022,
+          "median_fee_to_fair_at_signing": 1.319,
+          "median_fee_to_tm_value": 0.879
+        }
+      },
+      "premium_tests": {
+        "vs_market_value": {
+          "n": 139,
+          "Barcelona": {
+            "premium_pct": 7.9,
+            "ci_pct": [
+              -11.6,
+              31.8
+            ],
+            "p": 0.45
+          },
+          "Real Madrid": {
+            "premium_pct": -2.6,
+            "ci_pct": [
+              -20.9,
+              19.9
+            ],
+            "p": 0.799
+          }
+        },
+        "vs_stats_fair_fee": {
+          "n": 103,
+          "Barcelona": {
+            "premium_pct": 31.8,
+            "ci_pct": [
+              -2.8,
+              78.6
+            ],
+            "p": 0.075
+          },
+          "Real Madrid": {
+            "premium_pct": -8.9,
+            "ci_pct": [
+              -35.9,
+              29.5
+            ],
+            "p": 0.602
+          }
+        }
+      },
+      "wage_curve": {
+        "b_mv": 0.644,
+        "b_age": 0.184,
+        "r2_within": null,
+        "n": 117,
+        "n_actual_matched": 117
+      },
+      "wage_validation": [
+        {
+          "season": 2017,
+          "n": 22,
+          "corr_log": 0.739,
+          "median_abs_pct_err": 40.9
+        },
+        {
+          "season": 2018,
+          "n": 23,
+          "corr_log": 0.85,
+          "median_abs_pct_err": 39.4
+        },
+        {
+          "season": 2020,
+          "n": 19,
+          "corr_log": 0.751,
+          "median_abs_pct_err": 31.4
+        }
+      ]
+    },
+    "cpi": {
+      "basis": "cpi",
+      "basis_label": "Today's \u20ac (consumer prices)",
+      "market_model": {
+        "n": 7607,
+        "r2": 0.664,
+        "sigma_log": 0.786
+      },
+      "market_model_all_leagues": {
+        "n": 92543,
+        "r2": 0.738,
+        "sigma_log": 0.775
+      },
+      "market_premium": 1.25,
+      "use_seasons": 5,
+      "trophy_beta": 0.1014,
+      "trophy_beta_se": 0.0339,
+      "club_model": {
+        "n": 59,
+        "r2": 0.063,
+        "intercept_m": 37.02,
+        "slope": 0.114
+      }
+    },
+    "nominal": {
+      "basis": "nominal",
+      "basis_label": "Actual \u20ac at the time",
+      "market_model": {
+        "n": 7607,
+        "r2": 0.656,
+        "sigma_log": 0.798
+      },
+      "market_model_all_leagues": {
+        "n": 92543,
+        "r2": 0.73,
+        "sigma_log": 0.79
+      },
+      "market_premium": 1.25,
+      "use_seasons": 5,
+      "trophy_beta": 0.0796,
+      "trophy_beta_se": 0.0345,
+      "club_model": {
+        "n": 59,
+        "r2": 0.056,
+        "intercept_m": 29.36,
+        "slope": 0.106
+      }
+    }
+  }
+}
