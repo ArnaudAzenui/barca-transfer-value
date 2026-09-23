@@ -1,5 +1,8 @@
 """Build the dashboard.
 
+    python -m src.build_dashboard              re-export the data from the pipeline results, then build
+    python -m src.build_dashboard --from-json  reuse outputs/dashboard_data.json (for page/design-only changes)
+
 outputs/barca_signings_ledger.html  page body only (published as a claude.ai artifact, which adds its own skeleton)
 site/index.html                     complete stand-alone page, served by Vercel (see vercel.json)
 """
@@ -25,8 +28,8 @@ SKELETON = """<!doctype html>
 """
 
 
-def build():
-    data = export()
+def build(from_json: bool = False):
+    data = json.loads((OUTPUTS / "dashboard_data.json").read_text()) if from_json else export()
     body = (ROOT / "dashboard" / "template.html").read_text().replace("/*__DATA__*/", json.dumps(data, ensure_ascii=False))
     (OUTPUTS / "barca_signings_ledger.html").write_text(body)
     SITE.mkdir(exist_ok=True)
@@ -37,4 +40,5 @@ def build():
 
 
 if __name__ == "__main__":
-    build()
+    import sys
+    build(from_json="--from-json" in sys.argv)

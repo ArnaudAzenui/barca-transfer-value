@@ -219,7 +219,15 @@ seg(document.getElementById('view'), VIEWS, 'view');
 seg(document.getElementById('money'), BASES, 'basis');
 seg(document.getElementById('pos'), {All:'All',GK:'GK',DEF:'DEF',MID:'MID',ATT:'ATT'}, 'pos');
 const inPos = p => state.pos==='All' || (state.pos==='GK' ? p.group==='GK' : G3[p.group]===state.pos);
-const match = p => inPos(p) && (!state.q || p.name.toLowerCase().includes(state.q.toLowerCase()));
+// Accent-insensitive search: "suarez" finds Suárez, "odegaard" finds Ødegaard, "gundogan" finds Gündoğan.
+// Every word typed must appear somewhere in the name ("luis sua", "de jong").
+const FOLD = {'ø':'o','Ø':'o','ł':'l','Ł':'l','đ':'d','Đ':'d','ß':'ss','æ':'ae','Æ':'ae','œ':'oe','Œ':'oe','ı':'i','þ':'th'};
+const fold = t => (t||'').replace(/[øØłŁđĐßæÆœŒıþ]/g, c => FOLD[c]).normalize('NFD').replace(/[̀-ͯ]/g,'')
+  .toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+const NAME_KEY = new Map(P.map(p => [p.name, fold(p.name)]));
+const qMatch = name => { const q = fold(state.q); if (!q) return true;
+  const key = NAME_KEY.get(name) || fold(name); return q.split(' ').every(w => key.includes(w)); };
+const match = p => inPos(p) && qMatch(p.name);
 document.getElementById('q').addEventListener('input', e => { state.q = e.target.value; render(); });
 
 function drawTally(){
