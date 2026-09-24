@@ -1,560 +1,393 @@
 <title>Barça Signings Ledger</title>
-<meta name="description" content="Was each FC Barcelona signing since 2010 worth the fee? Performance, resale and inflation-adjusted verdicts.">
+<meta name="description" content="Was each FC Barcelona signing since 2010 worth the fee? Performance, resale and inflation-adjusted verdicts, compared with Real Madrid and Atlético.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{
-  --ground:#f3f4f7; --surface:#ffffff; --ink:#12151c; --ink-2:#4b5263; --muted:#7c8393;
-  --hair:#dde0e7; --band:#e9ebf0; --axis:#c3c7d1;
-  --over:#d23f45; --fair:#8a8f9b; --barg:#2a6fd1; --focus:#2a6fd1;
-  --over-wash:rgba(210,63,69,.10); --barg-wash:rgba(42,111,209,.10); --fair-wash:rgba(138,143,155,.14);
-  --display:"Archivo","Arial Narrow",system-ui,sans-serif;
-  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --bg:#ffffff; --ink:#16181d; --ink-2:#4a4f59; --muted:#6b717c; --faint:#9aa0aa;
+  --line:#ecedf0; --track:#f1f2f4; --hover:#f7f8fa;
+  --blau:#0b4a94; --grana:#a3174e; --fair:#aeb2ba;
+  --blau-wash:#eef3fa; --grana-wash:#fbeff4;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
-    --ground:#0e1014; --surface:#171a21; --ink:#eef0f4; --ink-2:#b4bac6; --muted:#8a91a0;
-    --hair:#2a2f3a; --band:#222631; --axis:#3a404d;
-    --over:#e86a6e; --fair:#8b919e; --barg:#5a97ea; --focus:#5a97ea;
-    --over-wash:rgba(232,106,110,.14); --barg-wash:rgba(90,151,234,.14); --fair-wash:rgba(139,145,158,.16);
+    --bg:#121417; --ink:#eceef2; --ink-2:#b8bdc7; --muted:#8d94a0; --faint:#6b717c;
+    --line:#262a31; --track:#20242a; --hover:#1a1d22;
+    --blau:#6fa3e8; --grana:#e0719b; --fair:#6f7580;
+    --blau-wash:#16233a; --grana-wash:#351a26;
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --ground:#0e1014; --surface:#171a21; --ink:#eef0f4; --ink-2:#b4bac6; --muted:#8a91a0;
-  --hair:#2a2f3a; --band:#222631; --axis:#3a404d;
-  --over:#e86a6e; --fair:#8b919e; --barg:#5a97ea; --focus:#5a97ea;
-  --over-wash:rgba(232,106,110,.14); --barg-wash:rgba(90,151,234,.14); --fair-wash:rgba(139,145,158,.16);
+  --bg:#121417; --ink:#eceef2; --ink-2:#b8bdc7; --muted:#8d94a0; --faint:#6b717c;
+  --line:#262a31; --track:#20242a; --hover:#1a1d22;
+  --blau:#6fa3e8; --grana:#e0719b; --fair:#6f7580;
+  --blau-wash:#16233a; --grana-wash:#351a26;
 }
 *{box-sizing:border-box}
-body{background:var(--ground);color:var(--ink);font:15px/1.55 var(--body);padding-inline:16px;padding-block:28px 56px}
-.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
-header{display:grid;gap:10px}
-.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-h1{font-family:var(--display);font-stretch:68%;font-weight:800;font-size:clamp(44px,8vw,88px);line-height:.9;margin:0;letter-spacing:-.01em;text-wrap:balance}
-h1 em{font-style:normal;color:var(--over)}
-.lede{max-width:68ch;color:var(--ink-2);margin:0}
-h2{font-family:var(--display);font-stretch:80%;font-weight:700;font-size:24px;margin:0;letter-spacing:.005em}
-.tally{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:10px;overflow:hidden}
-.tally div{background:var(--surface);padding:14px 16px;display:grid;gap:2px}
-.tally b{font-family:var(--display);font-stretch:75%;font-weight:800;font-size:40px;line-height:1}
-.tally span{font-size:13px;color:var(--ink-2)}
-.tally .o b{color:var(--over)} .tally .b b{color:var(--barg)} .tally .f b{color:var(--fair)}
-@media (max-width:640px){.tally{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.panel{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:20px}
-.controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between}
-.seg{display:inline-flex;border:1px solid var(--hair);border-radius:8px;overflow:hidden;background:var(--ground)}
-.seg button{all:unset;cursor:pointer;padding:7px 12px;font:500 13px/1.2 var(--body);color:var(--ink-2)}
-.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
-.seg button:focus-visible,.row:focus-visible,th button:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
-.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-input[type=search]{font:14px var(--body);padding:7px 10px;border:1px solid var(--hair);border-radius:8px;background:var(--surface);color:var(--ink);width:180px;max-width:100%}
-.explain{color:var(--ink-2);font-size:13.5px;margin:12px 0 0;max-width:80ch}
-.chart-wrap{position:relative;margin-top:8px}
-svg{display:block;width:100%;height:auto;overflow:visible}
-.tick text,.axis-label{fill:var(--muted);font:11px var(--mono)}
-.axis-label{font:12px var(--body);fill:var(--ink-2)}
-.tick line{stroke:var(--hair)}
-.dot{cursor:pointer;stroke:var(--surface);stroke-width:1.5}
-.dot.dim{opacity:.18}
-.dot.sel{stroke:var(--ink);stroke-width:2.5}
-.lbl{font:11px var(--body);fill:var(--ink-2);pointer-events:none}
-.tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--hair);box-shadow:0 6px 24px rgba(0,0,0,.12);border-radius:8px;padding:10px 12px;font-size:13px;min-width:200px;max-width:260px;z-index:3}
-.tip b{font-family:var(--display);font-stretch:85%;font-size:16px}
-.tip .kv{display:grid;grid-template-columns:1fr auto;gap:0 12px;margin-top:6px;font-variant-numeric:tabular-nums}
-.tip .kv span:nth-child(even){text-align:right;font-family:var(--mono);font-size:12px}
-.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);margin-top:10px}
-.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
-.grid2{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:20px;align-items:start}
-@media (max-width:900px){.grid2{grid-template-columns:1fr}}
-.grid2>*,.card>*{min-width:0}
-.facts span{overflow-wrap:anywhere}
-.tbl-wrap{overflow-x:auto;max-height:640px;overflow-y:auto;border-top:1px solid var(--hair);margin-top:12px}
-table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
-th{position:sticky;top:0;background:var(--surface);text-align:left;font:500 11px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--hair);padding:0;white-space:nowrap;z-index:1}
-th button{all:unset;cursor:pointer;display:block;padding:9px 8px}
-th.num,td.num{text-align:right}
-td{padding:8px;border-bottom:1px solid var(--hair);white-space:nowrap}
-.row{cursor:pointer}
-.row:hover td{background:var(--ground)}
-.row.sel td{background:var(--fair-wash)}
-.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap}
-.pill.o{background:var(--over-wash);color:var(--over)} .pill.b{background:var(--barg-wash);color:var(--barg)} .pill.f{background:var(--fair-wash);color:var(--ink-2)}
-.card{display:grid;gap:16px}
-.card h3{font-family:var(--display);font-stretch:72%;font-weight:800;font-size:38px;line-height:.95;margin:0}
-.meta{color:var(--ink-2);font-size:13.5px}
-.verdicts{display:flex;gap:8px;flex-wrap:wrap}
-.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.facts div{display:grid;gap:2px}
-.facts b{font:600 20px var(--display);font-stretch:85%;font-variant-numeric:tabular-nums}
-.facts span{font-size:12px;color:var(--muted)}
-.ledger{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:13.5px;font-variant-numeric:tabular-nums}
-.ledger span:nth-child(even){text-align:right;font-family:var(--mono);font-size:13px}
-.ledger .tot{border-top:1px solid var(--hair);padding-top:6px;font-weight:600}
-.sub{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-.note{font-size:12.5px;color:var(--muted);margin:0}
-.method{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.method p{margin:6px 0 0;color:var(--ink-2);font-size:13.5px}
-.method h4{margin:0;font:600 14px var(--body)}
-@media (max-width:800px){.method{grid-template-columns:1fr}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
-footer{color:var(--muted);font-size:12.5px}
-.byline{font:500 13px var(--mono);letter-spacing:.04em;color:var(--muted)}
-.byline b{color:var(--ink);font-weight:600}
-.byline a,footer a{color:inherit;text-underline-offset:3px}
-.ctrl-row{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
-.ctrl-row .lab{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.money-note{font-size:13px;color:var(--ink-2);background:var(--ground);border-radius:8px;padding:8px 12px;margin-top:12px}
-.seasons{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
-.seasons th{position:static;font:500 10.5px var(--mono);padding:4px 6px;text-transform:uppercase;letter-spacing:.04em}
-.seasons td{padding:5px 6px;border-bottom:1px solid var(--hair)}
-.seasons .grp{border-left:1px solid var(--hair)}
-.bar{height:8px;background:var(--band);border-radius:0 4px 4px 0;position:relative;min-width:40px}
-.bar span{position:absolute;inset:0 auto 0 0;background:var(--ink-2);border-radius:0 4px 4px 0}
-@media (prefers-reduced-motion:no-preference){.dot{transition:opacity .2s}}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);padding-inline:16px;padding-block:0}
+.wrap{max-width:760px;margin:0 auto;padding-block:88px 96px;display:flex;flex-direction:column;gap:44px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.b{color:var(--blau)} .g{color:var(--grana)}
+a{color:var(--blau)} a:hover{color:var(--grana)}
+:focus-visible{outline:2px solid var(--blau);outline-offset:2px;border-radius:2px}
+
+.eyebrow{display:flex;align-items:center;gap:10px;font:13px var(--mono);color:var(--muted)}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0}
+h1{margin:0;font-weight:500;font-size:clamp(30px,5.2vw,46px);line-height:1.16;letter-spacing:-.015em;text-wrap:balance}
+.lede{margin:0;font-size:18px;color:var(--ink-2);max-width:62ch}
+.tally{display:flex;flex-wrap:wrap;gap:6px 22px;font:14px var(--mono);color:var(--muted)}
+.tally b{font-weight:500;color:var(--ink)}
+header{display:flex;flex-direction:column;gap:20px}
+
+nav.tabs{display:flex;align-items:flex-end;gap:26px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+nav.tabs button{all:unset;cursor:pointer;font-size:15px;color:var(--muted);padding-bottom:12px;border-bottom:2px solid transparent;margin-bottom:-1px}
+nav.tabs button[aria-selected="true"]{color:var(--ink);font-weight:600;border-bottom-color:var(--ink)}
+.search{margin-left:auto;display:flex;align-items:center;gap:8px;padding-bottom:9px;color:var(--muted)}
+.search input{border:0;outline:0;font:15px var(--sans);width:150px;background:transparent;color:var(--ink)}
+.search input::placeholder{color:var(--faint)}
+.opts{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;font:13px var(--mono);color:var(--muted);margin-top:-24px}
+.opts .grp{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center}
+.opts button{all:unset;cursor:pointer;color:var(--muted);padding:2px 0;border-bottom:1px solid transparent}
+.opts button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.note{font-size:14px;color:var(--muted);margin:0}
+.sortby{display:flex;gap:14px;font:13px var(--mono);color:var(--muted);align-items:center}
+.sortby button{all:unset;cursor:pointer}
+.sortby button[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+
+/* deal rows */
+.list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.row{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:14px minmax(0,1fr) 82px 180px 84px;gap:16px;align-items:center;padding:13px 6px;border-bottom:1px solid var(--line)}
+.row:hover{background:var(--hover)}
+.row .nm{font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .nm small{color:var(--faint);font-size:13.5px;margin-left:6px}
+.row .vd{font:13px var(--mono)}
+.row .val{font:15px var(--mono);white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.bar{position:relative;height:18px}
+.bar .trk{position:absolute;left:0;right:0;top:8px;height:2px;background:var(--track)}
+.bar .zero{position:absolute;left:50%;top:3px;width:1px;height:12px;background:var(--faint)}
+.bar .rng{position:absolute;top:8px;height:2px;opacity:.35}
+.bar .fill{position:absolute;top:6px;height:6px;border-radius:3px}
+.more{padding:12px 0;text-align:center;font:13px var(--mono);color:var(--muted)}
+.more button{all:unset;cursor:pointer;color:var(--blau)}
+
+/* expanded card */
+.card{padding:22px 6px 30px 36px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:22px}
+.card .sub{font:12px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.kv{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 0;font-size:15px}
+.kv span:nth-child(odd){padding-right:18px}
+.kv span:nth-child(even){font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.kv .tot{border-top:1px solid var(--line);padding-top:6px;font-weight:600}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 40px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:12.5px var(--mono);padding:3px 9px;border-radius:999px;background:var(--track);color:var(--ink-2)}
+.chip.b{background:var(--blau-wash);color:var(--blau)} .chip.g{background:var(--grana-wash);color:var(--grana)}
+.seasons{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.seasons th{font:11.5px var(--mono);text-transform:uppercase;letter-spacing:.04em;color:var(--faint);font-weight:400;text-align:right;padding:4px 6px}
+.seasons th:first-child,.seasons td:first-child{text-align:left}
+.seasons td{padding:6px;border-top:1px solid var(--line);text-align:right;font-family:var(--mono);font-size:13.5px}
+.tblwrap{overflow-x:auto}
+
+/* sections */
+h2{margin:0;font-weight:500;font-size:22px;letter-spacing:-.005em}
+.prose{margin:0;font-size:17px;color:var(--ink-2);max-width:64ch}
+.prose b{color:var(--ink);font-weight:500}
+.group{display:flex;flex-direction:column;gap:6px;padding:16px 0;border-top:1px solid var(--line)}
+.group .hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.group .hd b{font-weight:600}
+.group .names{font-size:15px;color:var(--ink-2)}
+.group .names button{all:unset;cursor:pointer;border-bottom:1px dotted var(--faint)}
+.group .names button:hover{color:var(--blau)}
+table.cmp{width:100%;border-collapse:collapse;font-size:15px}
+table.cmp th{text-align:right;font:12px var(--mono);text-transform:uppercase;letter-spacing:.04em;color:var(--faint);font-weight:400;padding:8px 6px;border-bottom:1px solid var(--line)}
+table.cmp th:first-child{text-align:left}
+table.cmp td{padding:10px 6px;border-bottom:1px solid var(--line);text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+table.cmp td:first-child{text-align:left;font-family:var(--sans);color:var(--ink-2)}
+table.cmp td.best{color:var(--ink);font-weight:500}
+.clubs3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.clubs3 h3{margin:0 0 6px;font-size:15px;font-weight:600}
+.clubs3 .li{display:flex;justify-content:space-between;gap:8px;font-size:14px;padding:3px 0}
+.clubs3 .li span:last-child{font-family:var(--mono);white-space:nowrap}
+.nw{white-space:nowrap}
+.method p{margin:0 0 14px;font-size:16px;color:var(--ink-2);max-width:66ch}
+.method h3{margin:18px 0 6px;font-size:16px;font-weight:600}
+footer{font:13px var(--mono);color:var(--faint);border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:6px}
+footer b{color:var(--ink-2);font-weight:500}
+footer a{color:inherit;text-underline-offset:3px}
+.byline{font:14px var(--sans);color:var(--muted)}
+.byline b{color:var(--ink);font-weight:500}
+
+@media (max-width:640px){
+  .wrap{padding-block:48px 64px;gap:36px}
+  .row{grid-template-columns:12px minmax(0,1fr) 78px;gap:12px}
+  .row .vd,.row .bar{display:none}
+  .card{padding-left:6px}
+  .seasons th,.seasons td{padding:6px 3px;font-size:12px}
+  .seasons th{font-size:10px}
+  .two,.clubs3{grid-template-columns:1fr}
+  .search{margin-left:0;width:100%}
+  .search input{width:100%}
+  .opts{margin-top:-18px}
+}
+@media (prefers-reduced-motion:no-preference){.row{transition:background .15s}}
 </style>
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">FC Barcelona · paid signings · 2010/11 – 2025/26 · La Liga + Champions League + Europa League</div>
-    <h1>Worth the fee<em>?</em></h1>
+    <div class="eyebrow"><span class="dot" style="background:var(--blau)"></span><span class="dot" style="background:var(--grana)"></span><span>barça signings ledger · 2010–2026</span></div>
+    <h1 id="headline"></h1>
     <div class="byline">By <b>Arnaud Azenui</b></div>
-    <p class="lede">Every player Barça paid a transfer fee for since 2010, judged on what he did at the club (measured against players in the same role, with extra credit for trophies he helped win) and on the money Barça got back when he left. It also asks whether each fee was reasonable at the moment of signing, and how Barça's record compares with Real Madrid's and Atlético's. Switch the money basis to see how much inflation changes the story.</p>
+    <p class="lede">Every player Barça paid a transfer fee for, judged on what he did at the club (against players in the same role, with credit for trophies he helped win) and on the money that came back when he left.</p>
+    <div class="tally" id="tally"></div>
   </header>
 
-  <section class="tally" id="tally" aria-label="Verdict totals"></section>
+  <nav class="tabs" aria-label="Sections">
+    <button type="button" data-tab="deals" aria-selected="true">Deals</button>
+    <button type="button" data-tab="decisions" aria-selected="false">Decisions</button>
+    <button type="button" data-tab="rivals" aria-selected="false">Rivals</button>
+    <button type="button" data-tab="method" aria-selected="false">Method</button>
+    <label class="search" for="q">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+      <input id="q" type="search" placeholder="Find a player" autocomplete="off">
+    </label>
+  </nav>
+  <div class="opts">
+    <div class="grp" id="money" aria-label="Money basis"></div>
+    <div class="grp" id="pos" aria-label="Position"></div>
+  </div>
 
-  <section class="panel">
-    <div class="controls">
-      <div class="ctrl-row">
-        <span class="lab">View</span>
-        <div class="seg" role="group" aria-label="View" id="view"></div>
-      </div>
-      <div class="ctrl-row">
-        <span class="lab">Money</span>
-        <div class="seg" role="group" aria-label="Money basis" id="money"></div>
-      </div>
-    </div>
-    <div class="controls" style="margin-top:12px">
-      <div class="filters">
-        <div class="seg" role="group" aria-label="Position" id="pos"></div>
-        <label for="q" style="position:absolute;left:-9999px">Find a player</label>
-        <input id="q" type="search" placeholder="Find a player">
-      </div>
-    </div>
-    <div class="money-note" id="moneynote"></div>
-    <p class="explain" id="explain"></p>
-    <div class="chart-wrap" id="chartwrap"><svg id="chart" role="img" aria-label="Chart of signings"></svg><div class="tip" id="tip" hidden></div></div>
-    <div class="legend" id="legend"></div>
-  </section>
+  <main id="main"></main>
 
-  <section class="grid2">
-    <div class="panel">
-      <h2>All signings</h2>
-      <p class="note" style="margin-top:4px">Sorted by deal balance. Click a row for the full scorecard. “(resale)” means the sale, not the football, put the deal in profit.</p>
-      <div class="tbl-wrap"><table id="tbl"><thead></thead><tbody></tbody></table></div>
-    </div>
-    <div class="panel card" id="card" aria-live="polite"></div>
-  </section>
-
-  <section class="panel" id="rivals">
-    <div class="controls">
-      <h2>Barça vs Real Madrid vs Atlético</h2>
-      <div class="ctrl-row"><span class="lab">Signings</span><div class="seg" role="group" aria-label="Period" id="period"></div></div>
-    </div>
-    <p class="explain">The same method applied to every paid signing by the three clubs since 2010/11, in today's football €. Dots are coloured by each deal's verdict; the black tick is the club's median deal. Some early deals missing from the dataset were filled in by hand for all three clubs. From 2013/14 on, fee and appearance data are the most complete.</p>
-    <div class="tbl-wrap" style="max-height:none;border-top:0"><table id="clubtbl"></table></div>
-    <div class="chart-wrap" id="rivwrap" style="margin-top:16px"><svg id="rivchart" role="img" aria-label="Deal balances by club"></svg><div class="tip" id="rivtip" hidden></div></div>
-    <p class="note" id="premium" style="margin-top:12px"></p>
-    <div class="method" id="bestworst" style="margin-top:16px"></div>
-  </section>
-
-  <section class="panel">
-    <h2>How the verdicts are made</h2>
-    <div class="method" style="margin-top:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-      <div><h4>Role-aware season scores</h4><p>Each season from 2012/13 on is scored against players in the same role. <b>La Liga</b>: goals and assists per 90, share of team minutes, team points with and without him, goals conceded while he plays. <b>Europe</b>: goals and assists per 90 and share of minutes against the Champions League or Europa League field, with Europa League output discounted.</p></div>
-      <div><h4>Market model</h4><p>A linear regression on <span id="m-n"></span> La Liga player-seasons learns what the market pays for that output, adjusted for age, team strength and Champions League football (R² <span id="m-r2"></span>). Each Barça season gets a performance-implied value. Fair fee = that value × <span id="m-prem"></span>, the typical premium over Transfermarkt values.</p></div>
-      <div><h4>Deal balance (headline)</h4><p>Performance value + money back − fee. Each season is credited with 1/<span id="m-use"></span> of its fair fee, priced as if the player were 27, so a season is worth the same whatever his age. Money back is the sale fee, loan fees, or current value if he's still at the club. A fair-priced player who plays at that level for five seasons and leaves for free comes out at €0. The verdict is profit or loss only when the whole 80% range sits on one side of zero.</p></div>
-      <div><h4>Trophy points</h4><p>For every competition Barça <b>won</b>, a player earns points for his part in it: 60% share of the team's minutes, 40% share of its goals and assists. Weights: Champions League <b>3</b>, La Liga <b>2</b>, Copa del Rey and Europa League <b>1</b>, Club World Cup <b>0.75</b>, Supercopa and UEFA Super Cup <b>0.5</b>. The market model then learns what a point is worth: each point adds about <b><span id="m-tb"></span>%</b> to a season's value, so a leading role in a treble (Neymar in 2014/15 earned 3.6 points) lifts that season's value by about ×<span id="m-tre"></span>.</p></div>
-      <div><h4>Decision at signing</h4><p>What was he worth <i>when Barça signed him</i>? The same kind of market model, fitted on 92,000 player-seasons across 14 leagues (with league strength built in), is applied to his last two league seasons before joining. That's cross-checked against his Transfermarkt value on the day. A fee counts as overpaid at signing only when both views say so, since stats miss potential and valuations can run hot.</p></div>
-      <div><h4>Two supporting tests</h4><p><b>Fee test:</b> fee vs fair fee, from performance alone. <b>Total cost:</b> fee + wages − money back, compared with value delivered, benchmarked on Barça's other signings. When the deal balance is inconclusive but both tests agree, the headline leans their way.</p></div>
-    </div>
-    <p class="note" style="margin-top:16px">Money: <b>Today's football €</b> uses the average value of the 200 most valuable top-five-league players (prices roughly tripled from 2010 to 2025). <b>Consumer prices</b> uses approximate euro-area HICP inflation. <b>Actual €</b> applies no adjustment. The football index fits the data best: the total-cost model explains <span id="m-r2c"></span> of the variation with it, against <span id="m-r2n"></span> in actual euros. Limitations: box-score data misses build-up and pressing work, 2010–12 seasons have no appearance data, and wages come from Capology: actual player salaries for Barça in 2017/18, 2018/19 and 2020/21; otherwise each club's payroll for the season, split across the squad by market value and age. Source: transfermarkt-datasets (snapshot to July 2026), Capology payrolls, and hand-curated fees for early deals missing from the dataset.</p>
-  </section>
-  <footer>Built by <b style="color:var(--ink-2)">Arnaud Azenui</b> · <a href="https://github.com/ArnaudAzenui" target="_blank" rel="noopener">github.com/ArnaudAzenui</a><br>Made with Python (pandas, statsmodels). Code and notebook are in the <span style="font-family:var(--mono)">barca-transfer-value</span> project.</footer>
+  <footer><span>Built by <b>Arnaud Azenui</b> · <a href="https://github.com/ArnaudAzenui" target="_blank" rel="noopener">github.com/ArnaudAzenui</a></span><span>Data: transfermarkt-datasets (to July 2026), Capology payrolls, hand-entered fees for early deals. Made with Python.</span></footer>
 </div>
 
 <script>
 const DATA = /*__DATA__*/;
-const P = DATA.players, SUM = DATA.summary.by_basis, IX = DATA.index;
-const BASES = DATA.bases;
-const cls = v => !v ? 'f' : (v.startsWith('Bad') || v.startsWith('Leaning bad') || v==='Overpaid' || v==='Loss' || v.endsWith('went wrong') || v.endsWith('as the numbers warned')) ? 'o'
-  : (v.startsWith('Good') || v.startsWith('Leaning good') || v==='Bargain' || v==='Profit' || v.startsWith('Smart buy') || v.endsWith('paid off')) ? 'b' : 'f';
-const colorOf = v => ({o:'var(--over)', b:'var(--barg)', f:'var(--fair)'})[cls(v)];
+const P = DATA.players, SUM = DATA.summary.by_basis, H = DATA.summary.headline, IX = DATA.index;
+const BASES = {football:"Today's football €", cpi:"Consumer prices", nominal:"Actual €"};
+let state = {tab:'deals', basis:'football', pos:'All', q:'', open:null, sort:'balance', showAll:false, period:'all'};
+try { const s = JSON.parse(localStorage.getItem('ledger') || '{}'); ['basis','pos','sort'].forEach(k => { if (s[k]) state[k] = s[k]; }); } catch(e){}
+const save = () => { try { localStorage.setItem('ledger', JSON.stringify({basis:state.basis,pos:state.pos,sort:state.sort})); } catch(e){} };
+const B = p => p.by[state.basis];
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// ---------- formatting ----------
 const eur = x => x==null ? '–' : (Math.abs(x)>=100 ? Math.round(Math.abs(x)) : Math.abs(x).toFixed(1));
 const m = x => x==null ? '–' : (x<0?'−':'') + '€' + eur(x) + 'm';
 const sm = x => x==null ? '–' : (x<0?'−':'+') + '€' + eur(x) + 'm';
-const G3 = {GK:'DEF',CB:'DEF',FB:'DEF',MID:'MID',AM:'ATT',FW:'ATT'};
-const short = n => { const l = n.split(' ').slice(-1)[0]; return ['Suárez','Vidal','Jong','Torres','Alba','García'].includes(l) ? n.replace(/^(\S)\S+ /,'$1. ') : l; };
-const SHORT = {'Good deal (all tests agree)':'Good ✓✓','Good deal':'Good','Good deal (resale)':'Good (resale)','Leaning good deal':'Lean good',
-  'Fair deal':'Fair','Leaning bad deal':'Lean bad','Bad deal':'Bad','Bad deal (all tests agree)':'Bad ✓✓','Never played':'Never played','Never played, sold at a profit':'Never played (+)'};
-const VIEWS = {balance:'Deal balance', decision:'Decision vs outcome', fee:'Fee test', tot:'Total cost incl. wages'};
-let state = {view:'balance', basis:'football', pos:'All', q:'', sel:null, sort:{k:'balance', dir:-1}};
-try { const s = JSON.parse(localStorage.getItem('bsl2') || '{}'); ['view','basis','pos'].forEach(k => { if (s[k]) state[k] = s[k]; }); } catch(e){}
-const save = () => { try { localStorage.setItem('bsl2', JSON.stringify({view:state.view,basis:state.basis,pos:state.pos})); } catch(e){} };
-const B = p => p.by[state.basis];
+const yr = y => `${y}/${String(y+1).slice(2)}`;
+const tone = v => { v = v || ''; if (/paid off/.test(v)) return 'b'; if (/^(Bad|Leaning bad)|Overpaid|Loss|went wrong|as the numbers warned|^Never played$/.test(v)) return 'g';
+  if (/^(Good|Leaning good)|Bargain|Profit|Smart buy|paid off|sold at a profit/.test(v)) return 'b'; return ''; };
+const col = v => ({b:'var(--blau)', g:'var(--grana)'}[tone(v)] || 'var(--fair)');
+const SHORT = {'Good deal (all tests agree)':'Good','Good deal':'Good','Good deal (resale)':'Good*','Leaning good deal':'Lean good',
+  'Fair deal':'Fair','Leaning bad deal':'Lean bad','Bad deal':'Bad','Bad deal (all tests agree)':'Bad','Never played':'Unused','Never played, sold at a profit':'Unused+'};
 
-function seg(el, opts, key){
-  el.innerHTML = '';
-  Object.entries(opts).forEach(([k, t]) => { const b = document.createElement('button'); b.textContent = t; b.dataset.k = k;
-    b.onclick = () => { state[key] = k; save(); render(); }; el.appendChild(b); });
-}
-seg(document.getElementById('view'), VIEWS, 'view');
-seg(document.getElementById('money'), BASES, 'basis');
-seg(document.getElementById('pos'), {All:'All',GK:'GK',DEF:'DEF',MID:'MID',ATT:'ATT'}, 'pos');
-const inPos = p => state.pos==='All' || (state.pos==='GK' ? p.group==='GK' : G3[p.group]===state.pos);
-// Accent-insensitive search: "suarez" finds Suárez, "odegaard" finds Ødegaard, "gundogan" finds Gündoğan.
-// Every word typed must appear somewhere in the name ("luis sua", "de jong").
+// ---------- search (accent-insensitive) ----------
 const FOLD = {'ø':'o','Ø':'o','ł':'l','Ł':'l','đ':'d','Đ':'d','ß':'ss','æ':'ae','Æ':'ae','œ':'oe','Œ':'oe','ı':'i','þ':'th'};
 const fold = t => (t||'').replace(/[øØłŁđĐßæÆœŒıþ]/g, c => FOLD[c]).normalize('NFD').replace(/[̀-ͯ]/g,'')
   .toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
-const NAME_KEY = new Map(P.map(p => [p.name, fold(p.name)]));
-const qMatch = name => { const q = fold(state.q); if (!q) return true;
-  const key = NAME_KEY.get(name) || fold(name); return q.split(' ').every(w => key.includes(w)); };
+const KEY = new Map(P.map(p => [p.name, fold(p.name)]));
+const qMatch = name => { const q = fold(state.q); if (!q) return true; const k = KEY.get(name) || fold(name); return q.split(' ').every(w => k.includes(w)); };
+const G3 = {GK:'GK',CB:'DEF',FB:'DEF',MID:'MID',AM:'ATT',FW:'ATT'};
+const inPos = p => state.pos==='All' || G3[p.group]===state.pos;
 const match = p => inPos(p) && qMatch(p.name);
-document.getElementById('q').addEventListener('input', e => { state.q = e.target.value; render(); });
 
-function drawTally(){
-  const c = {b:0,f:0,o:0,n:0};
-  P.forEach(p => { const v = B(p).verdict; if (v.startsWith('Never')) c.n++; else c[cls(v)]++; });
-  document.getElementById('tally').innerHTML =
-    `<div class="b"><b>${c.b}</b><span>good deals (incl. leaning)</span></div>
-     <div class="f"><b>${c.f}</b><span>fair deals</span></div>
-     <div class="o"><b>${c.o}</b><span>bad deals (incl. leaning)</span></div>
-     <div><b>${c.n}</b><span>never played a league game</span></div>`;
-  const S = SUM[state.basis];
-  document.getElementById('m-n').textContent = S.market_model.n.toLocaleString();
-  document.getElementById('m-r2').textContent = S.market_model.r2.toFixed(2);
-  document.getElementById('m-prem').textContent = S.market_premium.toFixed(2);
-  document.getElementById('m-use').textContent = S.use_seasons;
-  document.getElementById('m-tb').textContent = Math.round((Math.exp(S.trophy_beta)-1)*100);
-  document.getElementById('m-tre').textContent = Math.exp(S.trophy_beta*3.56).toFixed(1);
-  document.getElementById('m-r2c').textContent = Math.round(SUM.football.club_model.r2*100) + '%';
-  document.getElementById('m-r2n').textContent = Math.round(SUM.nominal.club_model.r2*100) + '%';
-  const f13 = IX.find(r => r.season===2013), f10 = IX.find(r => r.season===2010);
-  const notes = {
-    football: `<b>Today's football €.</b> Each fee is scaled by how much football prices have risen since it was paid: €1 spent in 2010 = <b>€${(1/f10.football).toFixed(2)}</b> today, and in 2013 = <b>€${(1/f13.football).toFixed(2)}</b>. That's why Neymar's €88m reads as ~€247m. This is the recommended view.`,
-    cpi: `<b>Today's € (consumer prices).</b> Scaled by general euro-area inflation: €1 in 2010 = <b>€${(1/f10.cpi).toFixed(2)}</b> today. This barely moves football fees, so early deals look cheaper than they were.`,
-    nominal: `<b>Actual € at the time.</b> No adjustment: Neymar costs €88m and Dembélé €148m. Early fees look cheap next to later values, which flatters old deals.`};
-  document.getElementById('moneynote').innerHTML = notes[state.basis];
+// ---------- header ----------
+function drawHeader(){
+  const spent = P.reduce((s,p) => s + (B(p).fee||0), 0);
+  const cls = v => v.startsWith('Never') ? 'u' : tone(v) || 'f';
+  const good = P.filter(p => cls(B(p).verdict)==='b').length, bad = P.filter(p => cls(B(p).verdict)==='g').length;
+  const n = P.length, word = {football:"in today's money", cpi:"in today's euros (consumer prices)", nominal:"at the time"}[state.basis];
+  const frac = x => { const r = x/n; const opts = [[1,2,'1 in 2'],[2,5,'2 in 5'],[4,10,'4 in 10'],[1,3,'1 in 3'],[1,4,'1 in 4'],[1,5,'1 in 5'],[1,6,'1 in 6'],[1,10,'1 in 10']];
+    return opts.reduce((b,o) => Math.abs(o[0]/o[1]-r) < Math.abs(b[0]/b[1]-r) ? o : b)[2]; };
+  const spentTxt = spent >= 1000 ? '€' + (spent/1000).toFixed(1) + 'bn' : '€' + Math.round(spent) + 'm';
+  $('#headline').innerHTML = `Barça spent <span class="b">${spentTxt}</span> ${word} on ${n} signings. About <span class="b">${frac(good)}</span> paid off; <span class="g">${frac(bad)}</span> didn't.`;
+  const c = {b:0,f:0,g:0,u:0}; P.forEach(p => { const v = B(p).verdict; if (v.startsWith('Never')) c.u++; else if (tone(v)==='b') c.b++; else if (tone(v)==='g') c.g++; else c.f++; });
+  $('#tally').innerHTML = `<span><b class="b">${c.b}</b> good</span><span><b>${c.f}</b> fair</span><span><b class="g">${c.g}</b> bad</span><span><b>${c.u}</b> never played a league game</span>`;
 }
 
-// ---------- chart ----------
-const svg = document.getElementById('chart'), tip = document.getElementById('tip'), wrap = document.getElementById('chartwrap');
-const NS = 'http://www.w3.org/2000/svg';
-const el = (t, a, parent) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); (parent||svg).appendChild(e); return e; };
-const txt = (a, s, parent) => { const e = el('text', a, parent); e.textContent = s; return e; };
-function niceTicks(lo, hi, n){ const span = hi-lo, step0 = span/n, mag = Math.pow(10, Math.floor(Math.log10(step0))); const st = [1,2,2.5,5,10].map(x=>x*mag).find(s => span/s <= n) || mag*10;
-  const out = []; for (let v = Math.ceil(lo/st)*st; v <= hi+1e-9; v += st) out.push(+v.toFixed(6)); return out; }
-function dotEvents(c, p, x, y){
-  c.addEventListener('mouseenter', () => showTip(p, x, y)); c.addEventListener('mouseleave', () => tip.hidden = true);
-  c.addEventListener('focus', () => showTip(p, x, y)); c.addEventListener('blur', () => tip.hidden = true);
-  c.addEventListener('click', () => select(p.name)); c.addEventListener('keydown', e => { if (e.key==='Enter') select(p.name); });
-}
-function axisLabels(L, T, iw, ih, H, xl, yl){
-  txt({class:'axis-label',x:L+iw/2,y:H-8,'text-anchor':'middle'}, xl);
-  if (yl) txt({class:'axis-label',x:14,y:T+ih/2,'text-anchor':'middle',transform:`rotate(-90 14 ${T+ih/2})`}, yl);
-}
-function drawChart(){
-  svg.innerHTML = ''; tip.hidden = true;
-  const W = Math.max(340, wrap.clientWidth);
-  if (state.view==='balance') return drawBalance(W);
-  if (state.view==='decision') return drawDecision(W);
-  const H = Math.round(Math.min(560, Math.max(360, W*0.58)));
-  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  const L = 58, R = 18, T = 14, B_ = 48, iw = W-L-R, ih = H-T-B_;
-  const fee = state.view==='fee', S = SUM[state.basis];
-  const pts = P.filter(p => fee ? B(p).fair!=null : B(p).net_total!=null);
-  let X, Y, xt, yt, xl, yl;
-  const band = el('g'), grid = el('g');
-  if (fee){
-    const lx0 = Math.log(1), lx1 = Math.log(600), ly0 = Math.log(0.8), ly1 = Math.log(600);
-    X = v => L + (Math.log(v)-lx0)/(lx1-lx0)*iw; Y = v => T + ih - (Math.log(Math.max(v,0.8))-ly0)/(ly1-ly0)*ih;
-    xt = [1,2,5,10,20,50,100,200,500]; yt = [1,2,5,10,20,50,100,200,500];
-    xl = 'Fair fee justified by Barça performance (€m, log scale)'; yl = 'Fee paid (€m)';
-    const k = Math.exp(1.2816*S.market_model.sigma_log), xs = [];
-    for (let i=0;i<=60;i++) xs.push(Math.exp(lx0 + (lx1-lx0)*i/60));
-    const clip = el('clipPath',{id:'c'}); el('rect',{x:L,y:T,width:iw,height:ih},clip); band.setAttribute('clip-path','url(#c)');
-    el('path',{d:'M'+xs.map(x=>`${X(x)},${Y(x*k)}`).join('L')+'L'+xs.slice().reverse().map(x=>`${X(x)},${Y(x/k)}`).join('L')+'Z',fill:'var(--band)'},band);
-    el('path',{d:`M${X(1)},${Y(1)}L${X(600)},${Y(600)}`,stroke:'var(--ink)','stroke-width':1,fill:'none'},band);
-  } else {
-    const a = S.club_model.intercept_m, b = S.club_model.slope;
-    const res = pts.map(p => B(p).net_total - (a + b*B(p).value));
-    const half = 1.2816*Math.sqrt(res.reduce((s,r)=>s+r*r,0)/(res.length-2));
-    const xmax = Math.max(...pts.map(p => B(p).value))*1.05;
-    const ys = pts.map(p => B(p).net_total), ymin = Math.min(-20, ...ys)*1.1, ymax = Math.max(...ys)*1.1;
-    X = v => L + v/xmax*iw; Y = v => T + ih - (v-ymin)/(ymax-ymin)*ih;
-    xt = niceTicks(0, xmax, 5); yt = niceTicks(ymin, ymax, 6);
-    xl = 'Value delivered: sum of season performance values (€m)'; yl = 'Net cost: fee + wages − money back (€m)';
-    el('path',{d:`M${X(0)},${Y(a+half)}L${X(xmax)},${Y(a+b*xmax+half)}L${X(xmax)},${Y(a+b*xmax-half)}L${X(0)},${Y(a-half)}Z`,fill:'var(--band)'},band);
-    el('path',{d:`M${X(0)},${Y(a)}L${X(xmax)},${Y(a+b*xmax)}`,stroke:'var(--ink)','stroke-width':1},band);
-    el('line',{x1:L,x2:L+iw,y1:Y(0),y2:Y(0),stroke:'var(--axis)'},band);
-  }
-  svg.insertBefore(grid, band);
-  xt.forEach(v => { const g = el('g',{class:'tick'},grid); el('line',{x1:X(v),x2:X(v),y1:T,y2:T+ih},g); txt({x:X(v),y:T+ih+16,'text-anchor':'middle'}, v, g); });
-  yt.forEach(v => { const g = el('g',{class:'tick'},grid); el('line',{x1:L,x2:L+iw,y1:Y(v),y2:Y(v)},g); txt({x:L-8,y:Y(v)+4,'text-anchor':'end'}, v, g); });
-  axisLabels(L, T, iw, ih, H, xl, yl);
-  const vkey = fee ? 'market' : 'club';
-  pts.forEach(p => {
-    const q = B(p), x = fee ? X(q.fair) : X(q.value), y = fee ? Y(q.fee) : Y(q.net_total), on = match(p);
-    const c = el('circle',{cx:x,cy:y,r:state.sel===p.name?8:6,fill:colorOf(q[vkey]),class:'dot'+(on?'':' dim')+(state.sel===p.name?' sel':''),tabindex:on?0:-1,'aria-label':`${p.name}: ${q[vkey]}`});
-    dotEvents(c, p, x, y);
-    const big = fee ? (q.market!=='Fair price' || q.fee>150) : (q.club!=='Fair price' || q.value>=Math.max(...pts.map(z=>B(z).value))*0.5);
-    if (on && (big || state.sel===p.name || state.q)) {
-      const t = txt({class:'lbl',x:x+9,y:y+4}, short(p.name));
-      if (x > L+iw-80){ t.setAttribute('x', x-9); t.setAttribute('text-anchor','end'); }
-    }
-  });
-  setLegend(fee ? ['Overpaid','Fair price','Bargain'] : ['Overpaid','Fair price','Bargain'], true);
-  document.getElementById('explain').innerHTML = fee
-    ? `<b>Fee test, performance only.</b> Along the diagonal, the fee matched what his Barça performance was worth. Dots above the shaded 80% zone were <b style="color:var(--over)">overpaid</b>, dots below were <b style="color:var(--barg)">bargains</b>. Resale money is ignored here.`
-    : `<b>Total cost incl. wages.</b> Net cost of owning the player (fee + wages − sale, loan fees and current value) against the value he delivered. The line is Barça's typical cost for that value; each player is judged by a line fitted without him. Wages are Capology's actual salaries where known (Barça 2017/18, 2018/19, 2020/21), otherwise each season's Capology payroll split across the squad by market value and age.`;
+// ---------- controls ----------
+function drawControls(){
+  document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.tab===state.tab));
+  $('#money').innerHTML = '<span>money:</span>' + Object.entries(BASES).map(([k,t]) => `<button type="button" data-basis="${k}" aria-pressed="${k===state.basis}">${t}</button>`).join('');
+  $('#pos').innerHTML = ['All','GK','DEF','MID','ATT'].map(k => `<button type="button" data-pos="${k}" aria-pressed="${k===state.pos}">${k.toLowerCase()}</button>`).join('');
+  $('#pos').style.visibility = state.tab==='deals' || state.tab==='decisions' ? 'visible' : 'hidden';
 }
 
-function drawDecision(W){
-  const H = Math.round(Math.min(580, Math.max(380, W*0.6)));
-  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  const L = 58, R = 18, T = 24, B_ = 48, iw = W-L-R, ih = H-T-B_;
-  const pts = P.filter(p => B(p).decision_ratio!=null && B(p).balance!=null);
-  const lx0 = Math.log(0.08), lx1 = Math.log(16);
-  const ys = pts.map(p => B(p).balance), ymin = Math.max(-200, Math.min(-60, ...ys)*1.1), ymax = Math.min(450, Math.max(...ys)*1.1);
-  const X = v => L + (Math.log(Math.min(Math.max(v,0.08),16))-lx0)/(lx1-lx0)*iw;
-  const Y = v => T + ih - (Math.min(Math.max(v,ymin),ymax)-ymin)/(ymax-ymin)*ih;
-  const grid = el('g');
-  [0.1,0.25,0.5,1,2,4,8,16].forEach(v => { const g = el('g',{class:'tick'},grid); el('line',{x1:X(v),x2:X(v),y1:T,y2:T+ih},g); txt({x:X(v),y:T+ih+16,'text-anchor':'middle'}, v+'×', g); });
-  niceTicks(ymin, ymax, 6).forEach(v => { const g = el('g',{class:'tick'},grid); el('line',{x1:L,x2:L+iw,y1:Y(v),y2:Y(v)},g); txt({x:L-8,y:Y(v)+4,'text-anchor':'end'}, (v>0?'+':'')+v, g); });
-  el('line',{x1:X(1),x2:X(1),y1:T,y2:T+ih,stroke:'var(--ink)','stroke-width':1});
-  el('line',{x1:L,x2:L+iw,y1:Y(0),y2:Y(0),stroke:'var(--ink)','stroke-width':1});
-  const corner = (x, y, a, t) => txt({x, y, 'text-anchor':a, class:'lbl', style:'font-weight:600;fill:var(--muted)'}, t);
-  corner(L+8, T+12, 'start', 'Paid ≤ fair · made money: smart buys');
-  corner(L+iw-8, T+12, 'end', 'Paid above · made money anyway');
-  corner(L+8, T+ih-8, 'start', 'Paid ≤ fair · lost money: went wrong');
-  corner(L+iw-8, T+ih-8, 'end', 'Paid above · lost money: as warned');
-  axisLabels(L, T, iw, ih, H, 'Fee ÷ fair fee AT SIGNING (from his stats before joining, or his market value; log scale)', 'Deal balance (€m)');
-  const col = v => v==='Overpaid' ? 'var(--over)' : v==='Bargain' ? 'var(--barg)' : 'var(--fair)';
-  pts.forEach(p => {
-    const q = B(p), x = X(q.decision_ratio), y = Y(q.balance), on = match(p), sel = state.sel===p.name;
-    const c = el('circle',{cx:x,cy:y,r:sel?8:6,fill:col(q.decision),class:'dot'+(on?'':' dim')+(sel?' sel':''),tabindex:on?0:-1,'aria-label':`${p.name}: ${q.decision_outcome}`});
-    dotEvents(c, p, x, y);
-    if (on && (Math.abs(q.balance)>60 || q.decision!=='Fair price' || q.decision_ratio>4 || sel || state.q)) {
-      const t = txt({class:'lbl',x:x+9,y:y+4}, short(p.name));
-      if (x > L+iw-80){ t.setAttribute('x', x-9); t.setAttribute('text-anchor','end'); }
-    }
-  });
-  document.getElementById('legend').innerHTML = [['Overpaid at signing','var(--over)'],['Fair at signing','var(--fair)'],['Bargain at signing','var(--barg)']]
-    .map(([l,c]) => `<span><i style="background:${c}"></i>${l}</span>`).join('');
-  const cnt = {}; P.forEach(p => { const k = B(p).decision_outcome; cnt[k] = (cnt[k]||0)+1; });
-  document.getElementById('explain').innerHTML = `<b>Decision vs outcome.</b> Left to right: how the fee compared with what he was worth <i>when Barça signed him</i>, judged from his last two league seasons before joining (any of 14 leagues), cross-checked against his Transfermarkt value on the day. Bottom to top: how the deal turned out. A deal is only called overpaid at signing when both views agree. Of ${P.length} signings, <b>${cnt['Smart buy, paid off']||0}</b> were smart buys that paid off, <b>${cnt['Sound buy, went wrong']||0}</b> were defensible buys that went wrong, and <b>${(cnt['Overpaid, as the numbers warned']||0)}</b> went wrong as the numbers warned.`;
+// ---------- deals ----------
+let LIM = 320;
+function barHTML(q){
+  if (q.balance==null) return '<span class="bar"></span>';
+  const pos = v => 50 + Math.max(-LIM, Math.min(LIM, v)) / LIM * 50;
+  const a = pos(Math.min(0,q.balance)), b = pos(Math.max(0,q.balance)), c = col(q.verdict);
+  const lo = q.bal_lo==null ? a : pos(q.bal_lo), hi = q.bal_hi==null ? b : pos(q.bal_hi);
+  return `<span class="bar" aria-hidden="true"><span class="trk"></span><span class="rng" style="left:${lo}%;width:${Math.max(0,hi-lo)}%;background:${c}"></span>`+
+    `<span class="fill" style="left:${a}%;width:${Math.max(1,b-a)}%;background:${c}"></span><span class="zero"></span></span>`;
 }
-
-function drawBalance(W){
-  const pts = P.filter(p => B(p).balance!=null && match(p)).sort((a,b) => B(b).balance - B(a).balance);
-  const L = Math.min(150, W*0.32), R = 20, T = 26, rowH = 17, ih = Math.max(1, pts.length)*rowH, H = T + ih + 44, iw = W-L-R;
-  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  const lo = Math.min(-50, ...pts.map(p => B(p).bal_lo)), hi = Math.max(50, ...pts.map(p => B(p).bal_hi));
-  const cap = Math.max(Math.abs(lo), 0) , lim = [Math.max(lo, -250), Math.min(hi, 400)];
-  const X = v => L + (Math.min(Math.max(v, lim[0]), lim[1]) - lim[0])/(lim[1]-lim[0])*iw;
-  const grid = el('g');
-  niceTicks(lim[0], lim[1], 7).forEach(v => { const g = el('g',{class:'tick'},grid); el('line',{x1:X(v),x2:X(v),y1:T-6,y2:T+ih},g); txt({x:X(v),y:T+ih+16,'text-anchor':'middle'}, (v>0?'+':'')+v, g); });
-  el('line',{x1:X(0),x2:X(0),y1:T-10,y2:T+ih,stroke:'var(--ink)','stroke-width':1});
-  txt({x:X(0)-6,y:T-12,'text-anchor':'end',class:'lbl'}, '← loss');
-  txt({x:X(0)+6,y:T-12,class:'lbl'}, 'profit →');
-  pts.forEach((p, i) => {
-    const q = B(p), y = T + i*rowH + rowH/2, sel = state.sel===p.name;
-    const t = txt({x:L-10,y:y+4,'text-anchor':'end',class:'lbl',style:`cursor:pointer;${sel?'font-weight:600;fill:var(--ink)':''}`}, short(p.name).length>18 ? short(p.name).slice(0,17)+'…' : short(p.name));
-    t.style.pointerEvents = 'auto'; t.addEventListener('click', () => select(p.name));
-    el('line',{x1:X(q.bal_lo),x2:X(q.bal_hi),y1:y,y2:y,stroke:colorOf(q.bal),'stroke-width':2,'stroke-linecap':'round',opacity:.45});
-    if (q.bal_hi > lim[1]) txt({x:X(lim[1])+2,y:y+4,class:'lbl'}, '›');
-    const c = el('circle',{cx:X(q.balance),cy:y,r:sel?6.5:5,fill:colorOf(q.bal),class:'dot'+(sel?' sel':''),tabindex:0,'aria-label':`${p.name}: balance ${sm(q.balance)}`});
-    dotEvents(c, p, X(q.balance), y);
-  });
-  axisLabels(L, T, iw, ih, H, 'Deal balance: performance value + money back − fee (€m)', '');
-  setLegend(['Loss','Break-even','Profit'], false);
-  document.getElementById('explain').innerHTML = `<b>Deal balance, the headline.</b> What Barça got from each deal (his performances valued in euros, plus the sale fee, loan fees or current value) minus the fee. A dot is the best estimate and the line is its 80% range. The verdict is <b style="color:var(--barg)">profit</b> or <b style="color:var(--over)">loss</b> only when the whole range sits on one side of zero. ${pts.length<P.length?`Showing ${pts.length} of ${P.length}.`:''}`;
-}
-function setLegend(labels, bandLabel){
-  const col = {Overpaid:'var(--over)',Loss:'var(--over)','Fair price':'var(--fair)','Break-even':'var(--fair)',Bargain:'var(--barg)',Profit:'var(--barg)'};
-  document.getElementById('legend').innerHTML = labels.map(l => `<span><i style="background:${col[l]}"></i>${l}</span>`).join('')
-    + (bandLabel ? '<span><i style="background:var(--band);border-radius:2px"></i>80% prediction interval</span>' : '<span><i style="background:var(--fair);opacity:.45;height:3px;border-radius:2px;width:16px;vertical-align:3px"></i>80% range</span>');
-}
-function showTip(p, x, y){
-  const q = B(p), v = state.view;
-  const rows = v==='fee' ? [['Fee paid', m(q.fee)], ['Fair fee', m(q.fair)], ['Fair range (80%)', `${m(q.fair_lo)}–${eur(q.fair_hi)}m`], ['Fee ÷ fair', q.ratio==null?'–':q.ratio.toFixed(2)+'×']]
-    : v==='tot' ? [['Net cost', m(q.net_total)], ['Typical for value', m(q.club_fair)], ['Value delivered', m(q.value)]]
-    : v==='decision' ? [['Fee', m(q.fee)], ['Fair at signing (stats)', q.pre_fair==null?'no data':m(q.pre_fair)], ['Fair at signing (market value)', q.tm_fair==null?'–':m(q.tm_fair)], ['Deal balance', sm(q.balance)]]
-    : [['Performance value', sm(q.perf)], ['Money back', sm(q.recovered)], ['Fee', sm(-q.fee)], ['Balance', sm(q.balance)], ['80% range', `${sm(q.bal_lo)} to ${sm(q.bal_hi)}`]];
-  const vv = v==='fee' ? q.market : v==='tot' ? q.club : v==='decision' ? q.decision_outcome : q.verdict;
-  tip.innerHTML = `<b>${p.name}</b><div class="meta">${p.pos} · signed ${p.season}/${String(p.season+1).slice(2)} from ${p.from_club}</div>
-    <div class="kv">${rows.map(r => `<span>${r[0]}</span><span>${r[1]}</span>`).join('')}</div>
-    <div style="margin-top:8px"><span class="pill ${cls(vv)}">${vv}</span></div>`;
-  tip.hidden = false;
-  const Wd = wrap.clientWidth, sc = Wd / svg.viewBox.baseVal.width;
-  let left = x*sc + 14, top = y*sc - 20;
-  if (left + 270 > Wd) left = x*sc - 274;
-  tip.style.left = Math.max(0,left) + 'px'; tip.style.top = Math.max(0, top) + 'px';
-}
-
-// ---------- table ----------
-const COLS = [
-  {k:'name',t:'Player'},{k:'season',t:'Signed',num:1},{k:'fee',t:'Fee',num:1,f:m,b:1},{k:'ratio',t:'Fee ÷ fair',num:1,b:1,f:v=>v==null?'–':v.toFixed(2)+'×'},
-  {k:'balance',t:'Balance',num:1,b:1,f:sm},{k:'verdict',t:'Verdict',b:1}];
-const val = (p, c) => c.b ? B(p)[c.k] : p[c.k];
-function drawTable(){
-  const th = document.querySelector('#tbl thead'), tb = document.querySelector('#tbl tbody');
-  th.innerHTML = '<tr>' + COLS.map(c => `<th class="${c.num?'num':''}"><button data-k="${c.k}" aria-label="Sort by ${c.t}">${c.t}${state.sort.k===c.k?(state.sort.dir>0?' ↑':' ↓'):''}</button></th>`).join('') + '</tr>';
-  th.querySelectorAll('button').forEach(b => b.onclick = () => { const k = b.dataset.k; state.sort = {k, dir: state.sort.k===k ? -state.sort.dir : (k==='name'?1:-1)}; drawTable(); });
-  const col = COLS.find(c => c.k===state.sort.k);
-  const rows = P.filter(match).slice().sort((a,b) => { const x=val(a,col), y=val(b,col); if (x==null) return 1; if (y==null) return -1; return (x>y?1:x<y?-1:0)*state.sort.dir; });
-  tb.innerHTML = rows.map(p => `<tr class="row${state.sel===p.name?' sel':''}" tabindex="0" data-n="${p.name}">` + COLS.map(c => {
-    const v = val(p, c);
-    if (c.k==='verdict') return `<td><span class="pill ${cls(v)}" title="${v}">${SHORT[v]||v}</span></td>`;
-    if (c.k==='season') return `<td class="num">${v}/${String(v+1).slice(2)}</td>`;
-    return `<td class="${c.num?'num':''}">${c.f?c.f(v):v}</td>`; }).join('') + '</tr>').join('');
-  tb.querySelectorAll('.row').forEach(r => { r.onclick = () => select(r.dataset.n); r.onkeydown = e => { if (e.key==='Enter') select(r.dataset.n); }; });
-}
-
-// ---------- scorecard ----------
-function drawCard(){
-  const p = P.find(x => x.name===state.sel) || P.find(x => x.name==='Neymar');
-  const q = B(p), years = p.seasons, basisNote = state.basis==='nominal' ? 'actual €' : state.basis==='cpi' ? 'today\'s € (CPI)' : 'today\'s football €';
-  const maxPiv = Math.max(1, ...Object.values(q.piv).filter(v=>v!=null));
-  const srows = years.map(y => {
-    const s = p.per_season[y], v = q.piv[y];
-    const w = v==null ? 0 : Math.max(3, v/maxPiv*100);
-    return `<tr><td style="font-family:var(--mono);color:var(--muted)">${y}/${String(y+1).slice(2)}</td>
-      <td class="num">${s?s.lm.toLocaleString():'–'}</td><td class="num">${s?s.lg+'/'+s.la:'–'}</td>
-      <td class="num grp">${s&&s.em?s.em.toLocaleString():'–'}</td><td class="num">${s&&s.em?s.eg+'/'+s.ea:'–'}</td><td>${s&&s.comp?s.comp:''}</td>
-      <td class="num grp" title="${s&&s.tr?s.tr:'No trophies'}">${s&&s.tp?s.tp.toFixed(1):'–'}</td>
-      <td class="grp" style="width:34%"><div style="display:flex;gap:6px;align-items:center"><div class="bar" style="flex:1"><span style="width:${w}%"></span></div><span style="font-family:var(--mono);min-width:48px;text-align:right">${v==null?(y<2012?'no data':'–'):m(v)}</span></div></td></tr>`; }).join('');
+function cardHTML(p){
+  const q = B(p), bn = state.basis==='nominal' ? 'actual €' : state.basis==='cpi' ? "today's € (consumer prices)" : "today's football €";
+  const seasons = p.seasons.map(y => { const s = p.per_season[y], v = q.piv[y];
+    return `<tr><td>${yr(y)}</td><td>${s ? s.lm.toLocaleString() : '–'}</td><td>${s ? s.lg+'/'+s.la : '–'}</td><td>${s && s.em ? s.eg+'/'+s.ea : '–'}</td><td>${s && s.tp ? s.tp.toFixed(1) : '–'}</td><td>${v==null ? (y<2012 ? 'no data' : '–') : m(v)}</td></tr>`; }).join('');
   const notes = [];
-  if (p.covered < years.length) notes.push(`${years.length - p.covered} season(s) before 2012/13 have no appearance data and are credited at his covered average.`);
+  if (p.covered < p.seasons.length) notes.push(`${p.seasons.length - p.covered} season(s) before 2012/13 have no match data and are credited at his average.`);
   if (p.ongoing) notes.push('Still at the club: his current market value counts as money back.');
-  if (p.wage_src==='imputed') notes.push('Wage imputed from market value at signing.');
-  if (p.source==='curated') notes.push(`Fee from the hand-curated table (confidence: ${p.confidence}).`);
-  document.getElementById('card').innerHTML = `
-    <div><div class="eyebrow">${p.pos} · ${p.season}/${String(p.season+1).slice(2)} · age ${p.age ?? '–'} at signing</div>
-      <h3>${p.name}</h3><div class="meta">${p.from_club} → Barça${p.ongoing ? ' (still at the club)' : p.exit_to ? ' → ' + p.exit_to : ''}</div></div>
-    <div class="verdicts"><span class="pill ${cls(q.verdict)}" style="font-size:13px">${q.verdict}</span>
-      <span class="pill ${cls(q.market)}">Fee test: ${q.market}</span><span class="pill ${cls(q.club)}">Total cost: ${q.club}</span></div>
-    <div class="facts">
-      <div><b>${m(q.fee)}</b><span>fee in ${basisNote}${state.basis!=='nominal'?` (paid €${eur(p.fee_nom)}m)`:''}</span></div>
-      <div><b>${m(q.fair)}</b><span>fair fee (80%: ${m(q.fair_lo)}–${eur(q.fair_hi)}m)</span></div>
-      <div><b>${sm(q.balance)}</b><span>deal balance</span></div>
-      <div><b>${p.goals} / ${p.assists}</b><span>La Liga goals / assists${p.covered<years.length?' (from 2012/13)':''}</span></div>
-      <div><b>${p.eu_goals} / ${p.eu_assists}</b><span>European goals / assists</span></div>
-      <div><b>${p.trophy_pts==null?'0':p.trophy_pts.toFixed(1)}</b><span>trophy points</span></div>
+  if (p.source === 'curated') notes.push(`Fee entered by hand (confidence: ${p.confidence}).`);
+  if (q.decision_note) notes.push(`At signing the two views disagreed (${q.decision_note}), so the decision counts as fair.`);
+  const trophies = p.seasons.filter(y => p.per_season[y] && p.per_season[y].tr).map(y => `${yr(y)}: ${p.per_season[y].tr}`).join('<br>');
+  return `<div class="card" id="card-${esc(KEY.get(p.name))}">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <div class="mono" style="font-size:13px;color:var(--muted)">${esc(p.pos)} · signed ${yr(p.season)} from ${esc(p.from_club)}${p.age ? ' · age '+Math.floor(p.age) : ''} · ${p.ongoing ? 'still at the club' : 'left for '+esc(p.exit_to||'–')}</div>
+      <div class="chips"><span class="chip ${tone(q.verdict)}">${esc(q.verdict)}</span><span class="chip ${tone(q.decision_outcome)}">${esc(q.decision_outcome)}</span><span class="chip ${tone(q.market)}">fee test: ${esc(q.market.toLowerCase())}</span><span class="chip ${tone(q.club)}">with wages: ${esc(q.club.toLowerCase())}</span></div>
     </div>
-    <div><div class="sub">At signing: was the fee reasonable then?</div><div class="ledger">
-      <span>From his stats${p.pre_seasons?` (${p.pre_seasons}, ${p.pre_leagues}; ${p.pre_minutes.toLocaleString()} min, ${p.pre_goals} G / ${p.pre_assists} A)`:''}</span><span>${q.pre_fair==null?'no data':`${m(q.pre_fair)} (${m(q.pre_lo)}–${eur(q.pre_hi)}m)`}</span>
-      <span>From his Transfermarkt value that day</span><span>${q.tm_fair==null?'–':`${m(q.tm_fair)} (${m(q.tm_lo)}–${eur(q.tm_hi)}m)`}</span>
-      <span>Fee paid</span><span>${m(q.fee)}</span></div>
-      <div class="verdicts" style="margin-top:8px"><span class="pill ${cls(q.decision)}">Decision: ${q.decision}</span><span class="pill ${cls(q.decision_outcome)}">${q.decision_outcome}</span></div>
-      ${q.decision_note?`<p class="note" style="margin-top:6px">Views disagree (${q.decision_note}), so the decision counts as fair.</p>`:''}</div>
-    <div><div class="sub">Deal balance (${basisNote})</div><div class="ledger">
-      <span>Performance value (${years.length} season${years.length===1?'':'s'})</span><span>${sm(q.perf)}</span>
-      <span>Sale fee${p.exit_to?' ('+p.exit_to+')':''}</span><span>${sm(q.sale)}</span>
-      ${q.loans?`<span>Loan fees received</span><span>${sm(q.loans)}</span>`:''}
-      ${p.ongoing?`<span>Current market value</span><span>${sm(q.residual)}</span>`:''}
-      <span>Transfer fee</span><span>${sm(-q.fee)}</span>
-      <span class="tot">Balance</span><span class="tot">${sm(q.balance)}</span>
-      <span>80% range</span><span>${sm(q.bal_lo)} to ${sm(q.bal_hi)}</span></div></div>
-    <div><div class="sub">With wages (total-cost test)</div><div class="ledger">
-      <span>Fee + wages (${p.wage_src}) − money back</span><span>${m(q.net_total)}</span>
-      <span>Typical Barça cost for this value</span><span>${m(q.club_fair)}</span></div></div>
-    <div><div class="sub">Season by season</div><div style="overflow-x:auto"><table class="seasons">
-      <thead><tr><th></th><th class="num">Liga min</th><th class="num">G/A</th><th class="num grp">Eur min</th><th class="num">G/A</th><th></th><th class="grp num">Trophy pts</th><th class="grp">Credited value</th></tr></thead>
-      <tbody>${srows || '<tr><td colspan="8">No league minutes for Barça.</td></tr>'}</tbody></table></div></div>
-    ${trophyList(p)}
-    <p class="note">Credited value = that season's fair fee (priced as if he were 27) ÷ ${SUM[state.basis].use_seasons}. The seasons add up to his performance value.${p.covered < years.length ? ' Seasons before 2012/13 are credited at his average.' : ''}</p>
-    ${notes.length?`<p class="note">${notes.join(' ')}</p>`:''}`;
+    <div class="two">
+      <div><div class="sub">Deal balance · ${bn}</div><div class="kv">
+        <span>Performance value (${p.seasons.length} season${p.seasons.length===1?'':'s'})</span><span>${sm(q.perf)}</span>
+        <span>Sale fee${p.exit_to ? ' ('+esc(p.exit_to)+')' : ''}</span><span>${sm(q.sale)}</span>
+        ${q.loans ? `<span>Loan fees received</span><span>${sm(q.loans)}</span>` : ''}
+        ${p.ongoing ? `<span>Current market value</span><span>${sm(q.residual)}</span>` : ''}
+        <span>Transfer fee${state.basis!=='nominal' ? ' (paid €'+eur(p.fee_nom)+'m)' : ''}</span><span>${sm(q.fee==null?null:-q.fee)}</span>
+        <span class="tot">Balance</span><span class="tot">${sm(q.balance)}</span>
+        <span>80% range</span><span>${sm(q.bal_lo)} to ${sm(q.bal_hi)}</span></div></div>
+      <div><div class="sub">At signing</div><div class="kv">
+        <span>Fair fee from his stats${p.pre_seasons ? '<br><small style="color:var(--faint)">'+esc(p.pre_seasons)+', '+esc(p.pre_leagues)+'</small>' : ''}</span><span>${q.pre_fair==null ? 'no data' : m(q.pre_fair)}</span>
+        <span>Fair fee from his market value</span><span>${q.tm_fair==null ? '–' : m(q.tm_fair)}</span>
+        <span>Fee paid</span><span>${m(q.fee)}</span>
+        <span class="tot">Decision</span><span class="tot">${esc(q.decision.toLowerCase())}</span>
+        <span>Wages over the spell</span><span>${m(q.wages)}</span></div></div>
+    </div>
+    <div><div class="sub">Season by season</div><div class="tblwrap"><table class="seasons">
+      <thead><tr><th>Season</th><th>Liga min</th><th>Liga G/A</th><th>Europe G/A</th><th>Trophy pts</th><th>Credited</th></tr></thead>
+      <tbody>${seasons || '<tr><td colspan="6">No league minutes for Barça.</td></tr>'}</tbody></table></div></div>
+    ${trophies ? `<div><div class="sub">Trophies he helped win (share of involvement)</div><div style="font-size:14px;color:var(--ink-2)">${trophies}</div></div>` : ''}
+    ${notes.length ? `<p class="note">${notes.join(' ')}</p>` : ''}
+  </div>`;
 }
-function trophyList(p){
-  const rows = p.seasons.filter(y => p.per_season[y] && p.per_season[y].tr).map(y => `<span style="font-family:var(--mono);color:var(--muted)">${y}/${String(y+1).slice(2)}</span><span>${p.per_season[y].tr}</span>`);
-  if (!rows.length) return '';
-  return `<div><div class="sub">Trophies he contributed to (involvement %)</div><div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px">${rows.join('')}</div></div>`;
+function drawDeals(){
+  LIM = Math.max(50, ...P.map(p => Math.abs(B(p).balance || 0)));
+  const key = {balance: p => B(p).balance ?? -1e9, fee: p => B(p).fee ?? 0, season: p => -p.season}[state.sort];
+  const all = P.filter(match).slice().sort((a,b) => key(b) - key(a));
+  const limit = state.q || state.showAll || state.pos!=='All' ? all.length : 14;
+  const shown = all.length > limit ? [...all.slice(0, Math.ceil(limit/2)), null, ...all.slice(-Math.floor(limit/2))] : all;
+  const rows = shown.map(p => {
+    if (!p) return `<div class="more">${all.length - limit} more signings · <button type="button" id="showall">show all</button></div>`;
+    const q = B(p), open = state.open === p.name;
+    return `<button type="button" class="row" data-n="${esc(p.name)}" aria-expanded="${open}">
+      <span class="dot" style="background:${col(q.verdict)};width:8px;height:8px"></span>
+      <span class="nm">${esc(p.name)}<small>${yr(p.season)}</small></span>
+      <span class="vd" style="color:${col(q.verdict)}">${SHORT[q.verdict] || esc(q.verdict)}</span>
+      ${barHTML(q)}
+      <span class="val">${sm(q.balance)}</span></button>` + (open ? cardHTML(p) : '');
+  }).join('');
+  return `<section style="display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+      <p class="note">Deal balance = performance value + money back − fee. Line = 80% range. Click a row for the scorecard.</p>
+      <div class="sortby"><span>sort:</span>${[['balance','balance'],['fee','fee'],['season','signed']].map(([k,t]) => `<button type="button" data-sort="${k}" aria-pressed="${state.sort===k}">${t}</button>`).join('')}</div>
+    </div>
+    <div class="list">${rows || '<div class="more">No signings match.</div>'}</div>
+    <p class="note">* good because of the sale fee rather than the football. “Lean” means the balance is inconclusive but the other two tests agree.</p>
+  </section>`;
+}
+
+// ---------- decisions ----------
+function decisionSummary(){
+  const bad = P.filter(p => tone(B(p).verdict)==='g' && !B(p).verdict.startsWith('Never'));
+  const sound = bad.filter(p => B(p).decision !== 'Overpaid');
+  const warned = P.filter(p => B(p).decision_outcome==='Overpaid, as the numbers warned').map(p => p.name);
+  const list = a => a.length<=1 ? a.join('') : a.slice(0,-1).join(', ') + ' and ' + a[a.length-1];
+  return `<b>${sound.length} of ${bad.length}</b> bad deals were defensible at the time; they went wrong afterwards.` +
+    (warned.length ? ` Only ${list(warned)} ${warned.length===1?'was':'were'} clearly overpaid at signing and then went badly.` : '');
+}
+function drawDecisions(){
+  const groups = [
+    ['Smart buy, paid off', 'Fair or cheap at signing, and it paid off.'],
+    ['Sound buy, broke even', 'Fair at signing, roughly broke even.'],
+    ['Sound buy, went wrong', 'Defensible at signing, went wrong afterwards.'],
+    ['Overpaid, but it paid off', 'Expensive at signing, worked out anyway.'],
+    ['Overpaid, broke even', 'Expensive at signing, broke even.'],
+    ['Overpaid, as the numbers warned', 'Expensive at signing, and it showed.'],
+    ['No pre-signing data', ''],
+  ];
+  const ps = P.filter(match);
+  const cnt = k => ps.filter(p => B(p).decision_outcome===k).length;
+  const html = groups.filter(([k]) => cnt(k)).map(([k, d]) => {
+    const names = ps.filter(p => B(p).decision_outcome===k).sort((a,b) => (B(b).balance??0) - (B(a).balance??0))
+      .map((p,i,a) => `<span class="nw"><button type="button" data-goto="${esc(p.name)}">${esc(p.name)}</button>${i<a.length-1?',':''}</span>`).join(' ');
+    return `<div class="group"><div class="hd"><span><b style="color:${col(k)}">${k}</b> <span class="note" style="display:inline">${d}</span></span><span class="mono" style="color:var(--muted)">${cnt(k)}</span></div><div class="names">${names}</div></div>`;
+  }).join('');
+  return `<section style="display:flex;flex-direction:column;gap:18px">
+    <h2>Was the fee reasonable when he signed?</h2>
+    <p class="prose">Each fee is checked against what the player was worth <b>at the moment he joined</b>: from his last two league seasons before the move (14 leagues), and from his Transfermarkt value that day. A deal counts as overpaid at signing only when both views agree. Then it's paired with how the deal turned out.</p>
+    <p class="prose">${decisionSummary()}</p>
+    <div>${html}</div>
+  </section>`;
 }
 
 // ---------- rivals ----------
-const RV = DATA.rivals, CLUBS = ['Barcelona','Real Madrid','Atlético Madrid'];
-let period = 'all';
-try { period = localStorage.getItem('bsl_period') || 'all'; } catch(e){}
-(function(){ const el_ = document.getElementById('period');
-  [['all','All since 2010/11'],['2013','2013/14 on']].forEach(([k,t]) => { const b = document.createElement('button'); b.textContent=t; b.dataset.k=k;
-    b.onclick = () => { period = k; try{localStorage.setItem('bsl_period',k)}catch(e){}; drawRivals(); }; el_.appendChild(b); }); })();
 function drawRivals(){
-  document.querySelectorAll('#period button').forEach(b => b.setAttribute('aria-pressed', b.dataset.k===period));
-  const S = DATA.summary.headline[period==='all' ? 'clubs' : 'clubs_2013'];
+  const S = H[state.period==='all' ? 'clubs' : 'clubs_2013'], C = ['Barcelona','Real Madrid','Atlético Madrid'];
   const rows = [
     ['Paid signings', c => S[c].signings, v => v],
-    ['Spent (today\'s football €)', c => S[c].spent_m, v => '€'+Math.round(v).toLocaleString()+'m'],
-    ['Money back (sales, loans, current value)', c => S[c].recovered_m, v => '€'+Math.round(v).toLocaleString()+'m'],
-    ['Value of performances', c => S[c].perf_value_m, v => '€'+Math.round(v).toLocaleString()+'m'],
-    ['Wages paid to these signings', c => S[c].wages_m, v => '€'+Math.round(v).toLocaleString()+'m'],
-    ['Performance + money back per €1 of fee + wages', c => S[c].return_per_eur_total_cost, v => '€'+v.toFixed(2), 'hi'],
-    ['Total deal balance', c => S[c].total_balance_m, v => (v<0?'−':'+')+'€'+Math.round(Math.abs(v)).toLocaleString()+'m'],
-    ['Balance per €1 spent', c => S[c].balance_per_eur, v => (v<0?'−':'+')+'€'+Math.abs(v).toFixed(2), 'hi'],
-    ['Good deals (incl. leaning, resale)', c => S[c].good_share, v => Math.round(v*100)+'%', 'hi'],
-    ['Bad deals (incl. leaning, never played)', c => S[c].bad_share, v => Math.round(v*100)+'%', 'lo'],
-    ['Big-money flops (≥ €60m today)', c => S[c].big_money_bad / Math.max(1,S[c].big_money), (v,c) => `${S[c].big_money_bad} of ${S[c].big_money}`, 'lo'],
+    ["Spent (today's football €)", c => S[c].spent_m, v => '€'+Math.round(v).toLocaleString()+'m'],
+    ['Back per €1 of fee', c => S[c].balance_per_eur, v => '€'+v.toFixed(2), 'hi'],
+    ['Back per €1 of fee + wages', c => S[c].return_per_eur_total_cost, v => v==null ? '–' : '€'+v.toFixed(2), 'hi'],
+    ['Good deals', c => S[c].good_share, v => Math.round(v*100)+'%', 'hi'],
+    ['Bad deals', c => S[c].bad_share, v => Math.round(v*100)+'%', 'lo'],
+    ['Big-money flops (≥ €60m)', c => S[c].big_money_bad / Math.max(1,S[c].big_money), (v,c) => `${S[c].big_money_bad} of ${S[c].big_money}`, 'lo'],
     ['Overpaid at signing', c => S[c].overpaid_at_signing_share, v => Math.round(v*100)+'%', 'lo'],
-    ['Median fee ÷ Transfermarkt value', c => S[c].median_fee_to_tm_value, v => v.toFixed(2)+'×', 'lo'],
   ];
-  const t = document.getElementById('clubtbl');
-  t.innerHTML = `<thead><tr><th><button tabindex="-1">Measure</button></th>${CLUBS.map(c => `<th class="num"><button tabindex="-1">${c}</button></th>`).join('')}</tr></thead><tbody>` +
-    rows.map(([label, f, fmt, best]) => { const vals = CLUBS.map(f);
-      const bi = best==='hi' ? vals.indexOf(Math.max(...vals)) : best==='lo' ? vals.indexOf(Math.min(...vals)) : -1;
-      return `<tr><td>${label}</td>${CLUBS.map((c,i) => `<td class="num" style="${i===bi?'font-weight:600':''}">${fmt(vals[i], c)}${i===bi?' ●':''}</td>`).join('')}</tr>`; }).join('') + '</tbody>';
-  // strip chart
-  const svg2 = document.getElementById('rivchart'), wrap2 = document.getElementById('rivwrap'), tip2 = document.getElementById('rivtip');
-  svg2.innerHTML = '';
-  const W = Math.max(340, wrap2.clientWidth), L = 120, R = 16, T = 10, rowH = 70, H = T + rowH*3 + 40, iw = W-L-R;
-  svg2.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  const lim = [-150, 350], X = v => L + (Math.min(Math.max(v, lim[0]), lim[1]) - lim[0])/(lim[1]-lim[0])*iw;
-  const E = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); (p||svg2).appendChild(e); return e; };
-  niceTicks(lim[0], lim[1], 8).forEach(v => { const g = E('g',{class:'tick'}); E('line',{x1:X(v),x2:X(v),y1:T,y2:T+rowH*3},g); const tx = E('text',{x:X(v),y:T+rowH*3+16,'text-anchor':'middle'},g); tx.textContent = (v>0?'+':'')+v; });
-  E('line',{x1:X(0),x2:X(0),y1:T,y2:T+rowH*3,stroke:'var(--ink)','stroke-width':1});
-  const lab = E('text',{class:'axis-label',x:L+iw/2,y:H-6,'text-anchor':'middle'}); lab.textContent = 'Deal balance per signing (€m, today\'s football money)';
-  CLUBS.forEach((c, ci) => {
-    const y0 = T + ci*rowH + rowH/2;
-    const nm = E('text',{x:L-10,y:y0+4,'text-anchor':'end',style:'font:600 13px var(--body);fill:var(--ink)'}); nm.textContent = c;
-    const deals = RV.filter(r => r.club===c && r.balance!=null && (period==='all' || r.season>=2013));
-    const med = deals.map(r=>r.balance).sort((a,b)=>a-b)[Math.floor(deals.length/2)];
-    E('line',{x1:X(med),x2:X(med),y1:y0-26,y2:y0+26,stroke:'var(--ink)','stroke-width':3,'stroke-linecap':'round'});
-    const mt = E('text',{x:X(med)+6,y:y0-18,class:'lbl'}); mt.textContent = 'median '+sm(med);
-    deals.forEach((r, i) => {
-      const jit = ((i*37)%17 - 8) * 2.2;
-      const d = E('circle',{cx:X(r.balance),cy:y0+jit,r:4.5,fill:colorOf(r.verdict),opacity:.75,class:'dot',tabindex:0});
-      const show = () => { tip2.innerHTML = `<b>${r.name}</b><div class="meta">${c} · ${r.season}/${String(r.season+1).slice(2)} from ${r.from_club}</div><div class="kv"><span>Fee (today's €)</span><span>${m(r.fee)}</span><span>Paid then</span><span>€${eur(r.fee_nom)}m</span><span>Deal balance</span><span>${sm(r.balance)}</span></div><div style="margin-top:8px"><span class="pill ${cls(r.verdict)}">${r.verdict}</span> <span class="pill ${cls(r.outcome)}">${r.outcome}</span></div>`;
-        tip2.hidden = false; const sc = wrap2.clientWidth / W; let left = X(r.balance)*sc + 12; if (left+270 > wrap2.clientWidth) left = X(r.balance)*sc - 272; tip2.style.left = Math.max(0,left)+'px'; tip2.style.top = Math.max(0,(y0+jit)*sc-20)+'px'; };
-      d.addEventListener('mouseenter', show); d.addEventListener('focus', show);
-      d.addEventListener('mouseleave', () => tip2.hidden = true); d.addEventListener('blur', () => tip2.hidden = true);
-    });
-  });
-  const PT = DATA.summary.headline.premium_tests, pv = PT.vs_stats_fair_fee.Barcelona, pm = PT.vs_market_value.Barcelona;
-  document.getElementById('premium').innerHTML = `<b>Is there a "Barça premium"?</b> For €10m+ deals, compared with Atlético and controlling for year and age: against his stats before joining, Barça paid <b>${pv.premium_pct>0?'+':''}${pv.premium_pct}%</b> more (95% range ${pv.ci_pct[0]}% to +${pv.ci_pct[1]}%, p = ${pv.p}; ${PT.vs_stats_fair_fee.n} deals). Against Transfermarkt values the gap is ${pm.premium_pct>0?'+':''}${pm.premium_pct}% (p = ${pm.p}). ${PT.vs_stats_fair_fee['Real Madrid'].p>0.1 && PT.vs_market_value['Real Madrid'].p>0.1 ? 'Real Madrid shows no clear premium on either measure.' : ''} So Barça tends to pay more for the same on-pitch record, but the evidence is suggestive rather than conclusive.`;
-  document.getElementById('bestworst').innerHTML = CLUBS.map(c => {
-    const deals = RV.filter(r => r.club===c && r.balance!=null && (period==='all' || r.season>=2013)).sort((a,b) => b.balance-a.balance);
-    const li = r => `<div style="display:flex;justify-content:space-between;gap:8px;font-size:13px"><span>${r.name} <span style="color:var(--muted)">${r.season}/${String(r.season+1).slice(2)}</span></span><span style="font-family:var(--mono)">${sm(r.balance)}</span></div>`;
-    return `<div><h4>${c}</h4><div class="sub" style="margin-top:8px">Best</div>${deals.slice(0,4).map(li).join('')}<div class="sub" style="margin-top:8px">Worst</div>${deals.slice(-4).reverse().map(li).join('')}</div>`; }).join('');
+  const tbl = `<div class="tblwrap"><table class="cmp"><thead><tr><th>per club</th>${C.map(c => `<th>${c.replace(' Madrid','')}</th>`).join('')}</tr></thead><tbody>` +
+    rows.map(([l,f,fmt,best]) => { const v = C.map(f); const bi = best==='hi' ? v.indexOf(Math.max(...v)) : best==='lo' ? v.indexOf(Math.min(...v)) : -1;
+      return `<tr><td>${l}</td>${C.map((c,i) => `<td class="${i===bi?'best':''}">${fmt(v[i],c)}</td>`).join('')}</tr>`; }).join('') + '</tbody></table></div>';
+  const lists = C.map(c => { const d = DATA.rivals.filter(r => r.club===c && r.balance!=null && (state.period==='all' || r.season>=2013)).sort((a,b) => b.balance-a.balance);
+    const li = r => `<div class="li"><span>${esc(r.name)} <span style="color:var(--faint)">${yr(r.season)}</span></span><span style="color:${r.balance>=0?'var(--blau)':'var(--grana)'}">${sm(r.balance)}</span></div>`;
+    return `<div><h3>${c}</h3><div class="card-sub note" style="margin:6px 0 2px">best</div>${d.slice(0,3).map(li).join('')}<div class="note" style="margin:10px 0 2px">worst</div>${d.slice(-3).reverse().map(li).join('')}</div>`; }).join('');
+  const b = S['Barcelona'], r = S['Real Madrid'], a = S['Atlético Madrid'], pt = H.premium_tests.vs_stats_fair_fee.Barcelona;
+  return `<section style="display:flex;flex-direction:column;gap:22px">
+    <h2>Against the rivals</h2>
+    <p class="prose">For every €1 of fee, Barça got <span class="mono b">€${b.balance_per_eur.toFixed(2)}</span> back in performance and resale, against <span class="mono">€${r.balance_per_eur.toFixed(2)}</span> for Real Madrid and <span class="mono">€${a.balance_per_eur.toFixed(2)}</span> for Atlético. For comparable players, Barça paid about <b>${Math.abs(Math.round(pt.premium_pct))}% ${pt.premium_pct>=0?'more':'less'}</b> than Atlético (p = ${pt.p}): suggestive, not conclusive.</p>
+    <div class="sortby"><span>signings:</span><button type="button" data-period="all" aria-pressed="${state.period==='all'}">all since 2010/11</button><button type="button" data-period="2013" aria-pressed="${state.period==='2013'}">2013/14 on</button></div>
+    ${tbl}
+    <div class="clubs3">${lists}</div>
+  </section>`;
 }
 
-function select(n){ state.sel = n; render(); if (window.innerWidth < 900) document.getElementById('card').scrollIntoView({behavior:'smooth',block:'start'}); }
-function render(){
-  [['view','view'],['money','basis'],['pos','pos']].forEach(([id,k]) => document.getElementById(id).querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.k===state[k])));
-  drawTally(); drawChart(); drawTable(); drawCard();
+// ---------- method ----------
+function drawMethod(){
+  const S = SUM[state.basis];
+  return `<section class="method">
+    <h2 style="margin-bottom:14px">How it works</h2>
+    <h3>Money</h3><p>Fees from different years are put on one scale. <b>Today's football €</b> uses the average value of the 200 most valuable top-five-league players (prices rose about ${(1/IX.find(r => r.season===2010).football).toFixed(1)}× from 2010/11 to 2025/26); <b>consumer prices</b> uses euro-area inflation; <b>actual €</b> applies no adjustment.</p>
+    <h3>Performance</h3><p>Each season from 2012/13 is scored against players in the same role: goals and assists per 90, share of team minutes, team points with and without him, goals conceded while he plays, plus Champions League and Europa League output. Trophies count extra: Champions League 3 points, league 2, cups 1, super cups 0.5, scaled by how much he played and contributed.</p>
+    <h3>Value</h3><p>A linear regression on ${S.market_model.n.toLocaleString()} La Liga player-seasons (R² ${S.market_model.r2.toFixed(2)}) prices each season's output. Fair fee = that value × ${S.market_premium.toFixed(2)}, the usual premium clubs pay over valuations.</p>
+    <h3>Deal balance</h3><p>Performance value (each season credited with 1/${S.use_seasons} of its fair fee, priced at age 27) + money back (sale fee, loan fees, or current value if still at the club) − fee. A fair-priced player who plays five seasons at that level and leaves for free comes out at €0. Verdicts are profit or loss only when the whole 80% range sits on one side of zero.</p>
+    <h3>Limitations</h3><p>Box-score data misses build-up and pressing work. 2010–12 seasons have no match data. ${P.filter(p => p.source==='curated').length} of Barça's fees were entered by hand, and wages are partly estimated from Capology payrolls.</p>
+  </section>`;
 }
-let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { drawChart(); drawRivals(); }, 120); });
-render(); drawRivals();
+
+// ---------- render ----------
+function render(){
+  drawHeader(); drawControls();
+  $('#main').innerHTML = state.tab==='deals' ? drawDeals() : state.tab==='decisions' ? drawDecisions() : state.tab==='rivals' ? drawRivals() : drawMethod();
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('button'); if (!t) return;
+  if (t.dataset.tab) { state.tab = t.dataset.tab; state.open = null; }
+  else if (t.dataset.basis) { state.basis = t.dataset.basis; save(); }
+  else if (t.dataset.pos) { state.pos = t.dataset.pos; save(); }
+  else if (t.dataset.sort) { state.sort = t.dataset.sort; save(); }
+  else if (t.dataset.period) { state.period = t.dataset.period; }
+  else if (t.id === 'showall') { state.showAll = true; }
+  else if (t.dataset.goto) { state.tab = 'deals'; state.open = t.dataset.goto; state.showAll = true; render();
+    const el = document.querySelector(`.row[data-n="${CSS.escape(t.dataset.goto)}"]`); if (el) el.scrollIntoView({block:'start', behavior:'smooth'}); return; }
+  else if (t.classList.contains('row')) { state.open = state.open === t.dataset.n ? null : t.dataset.n; }
+  else return;
+  render();
+});
+$('#q').addEventListener('input', e => { state.q = e.target.value; if (state.tab!=='deals' && state.tab!=='decisions') state.tab = 'deals'; render(); });
+render();
 </script>
