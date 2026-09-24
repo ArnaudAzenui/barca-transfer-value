@@ -145,4 +145,5 @@ def add_trophies(scored: pd.DataFrame) -> pd.DataFrame:
     d = d.merge(t, on=["player_id", "club_id", "season"], how="left")
     d["trophy_pts"] = d["trophy_pts"].fillna(0.0)
     d["trophies"] = d["trophies"].fillna("")
-    return d
+    from .patches import apply_trophies
+    return apply_trophies(d)   # La Liga / Champions League titles in 2010/11-2011/12

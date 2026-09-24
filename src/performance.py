@@ -66,6 +66,8 @@ def player_seasons() -> pd.DataFrame:
     ).reset_index().rename(columns={"player_club_id": "club_id"})
     ps = ps.merge(team, on=["club_id", "season", "league"], how="left")
     ps = ps.merge(cov, on=["club_id", "season", "league"], how="left")
+    from .patches import apply_league
+    ps = apply_league(ps, team, cov)     # StatMuse fixes + seasons missing from the dataset
 
     m = ps["minutes"].clip(lower=1)
     ps["g90"] = ps["goals"] / m * 90
@@ -77,6 +79,7 @@ def player_seasons() -> pd.DataFrame:
     # need a few games each side for on/off to mean anything; otherwise neutral
     ps["onoff"] = np.where((ps["g60"] >= 5) & (off >= 3), ppg_on - ppg_off, np.nan)
     ps["cs"] = -(ps["ga_on"] / ps["g60"].replace(0, np.nan))     # fewer conceded = higher
+    ps.loc[ps["patched"], "onoff"] = np.nan   # no line-ups for patched seasons: neutral
 
     pl = load("players")[["player_id", "name", "position", "sub_position", "date_of_birth"]]
     ps = ps.merge(pl, on="player_id", how="left")
@@ -86,10 +89,11 @@ def player_seasons() -> pd.DataFrame:
 
 def score(ps: pd.DataFrame) -> pd.DataFrame:
     """z-score each metric within (league, season, role group) using peers with enough minutes; combine by role weights."""
-    peers = ps[ps["minutes"] >= MIN_PEER_MINUTES]
+    peers = ps[(ps["minutes"] >= MIN_PEER_MINUTES) & ~ps["patched"].astype(bool)]
     stats = peers.groupby(["league", "season", "group"])[METRICS].agg(["mean", "std"])
     out = ps.copy()
-    key = out.set_index(["league", "season", "group"]).index
+    # patched pre-2012 seasons are compared with the first season that has league-wide data (norm_season)
+    key = out.set_index(["league", "norm_season", "group"]).index
     for mtr in METRICS:
         mu = key.map(stats[(mtr, "mean")])
         sd = key.map(stats[(mtr, "std")])

@@ -1,5 +1,5 @@
 player,signing_season,fee_actual_m,fee_football_m,verdict_football,fee_cpi_m,verdict_cpi,fee_nominal_m,verdict_nominal
-David Villa,2010,40.0,126.38372500876886,Leaning bad deal,55.322223840667604,Fair deal,40.0,Fair deal
+David Villa,2010,40.0,126.38372500876886,Fair deal,55.322223840667604,Fair deal,40.0,Fair deal
 Adriano,2010,9.5,30.016134689582604,Fair deal,13.139028162158557,Fair deal,9.5,Fair deal
 Javier Mascherano,2010,22.0,69.51104875482288,Fair deal,30.427223112367184,Good deal,22.0,Good deal
 Ibrahim Afellay,2010,3.0,9.478779375657664,Fair deal,4.149166788050071,Fair deal,3.0,Fair deal
@@ -36,7 +36,7 @@ Malcom,2018,41.0,44.37971641432348,Good deal (resale),51.00447185105717,Good dea
 Arturo Vidal,2018,18.0,19.483777937995672,Fair deal,22.392207154122662,Fair deal,18.0,Fair deal
 Emerson Royal,2018,26.0,28.143234799327082,Good deal (resale),32.34429922262162,Good deal (resale),26.0,Good deal (resale)
 Jean-Clair Todibo,2018,1.0,1.0824321076664263,Good deal,1.24401150856237,Good deal,1.0,Good deal
-Frenkie de Jong,2019,86.0,93.71225806451612,Fair deal,105.71639302012235,Leaning bad deal,86.0,Leaning bad deal
+Frenkie de Jong,2019,86.0,93.71225806451612,Fair deal,105.71639302012235,Fair deal,86.0,Fair deal
 Neto,2019,26.0,28.331612903225807,Bad deal,31.96076998282769,Bad deal,26.0,Bad deal
 Antoine Griezmann,2019,120.0,130.76129032258063,Leaning bad deal,147.51124607458934,Bad deal (all tests agree),120.0,Bad deal (all tests agree)
 Marc Cucurella,2019,4.0,4.358709677419355,"Never played, sold at a profit",4.917041535819644,"Never played, sold at a profit",4.0,"Never played, sold at a profit"

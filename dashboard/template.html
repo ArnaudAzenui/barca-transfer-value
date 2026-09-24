@@ -162,7 +162,7 @@ footer a{color:inherit;text-underline-offset:3px}
 
   <main id="main"></main>
 
-  <footer><span>Built by <b>Arnaud Azenui</b> · <a href="https://github.com/ArnaudAzenui" target="_blank" rel="noopener">github.com/ArnaudAzenui</a></span><span>Data: transfermarkt-datasets (to July 2026), Capology payrolls, hand-entered fees for early deals. Made with Python.</span></footer>
+  <footer><span>Built by <b>Arnaud Azenui</b> · <a href="https://github.com/ArnaudAzenui" target="_blank" rel="noopener">github.com/ArnaudAzenui</a></span><span>Data: transfermarkt-datasets (to July 2026), Capology payrolls, hand-entered fees for early deals. Stats checked against StatMuse (FBref for early assists). Made with Python.</span></footer>
 </div>
 
 <script>
@@ -232,9 +232,12 @@ function barHTML(q){
 function cardHTML(p){
   const q = B(p), bn = state.basis==='nominal' ? 'actual €' : state.basis==='cpi' ? "today's € (consumer prices)" : "today's football €";
   const seasons = p.seasons.map(y => { const s = p.per_season[y], v = q.piv[y];
-    return `<tr><td>${yr(y)}</td><td>${s ? s.lm.toLocaleString() : '–'}</td><td>${s ? s.lg+'/'+s.la : '–'}</td><td>${s && s.em ? s.eg+'/'+s.ea : '–'}</td><td>${s && s.tp ? s.tp.toFixed(1) : '–'}</td><td>${v==null ? (y<2012 ? 'no data' : '–') : m(v)}</td></tr>`; }).join('');
+    return `<tr><td>${yr(y)}${s && s.pn ? '<sup title="'+esc(s.pn)+'">†</sup>' : ''}</td><td>${s ? s.lm.toLocaleString() : '–'}</td><td>${s ? s.lg+'/'+s.la : '–'}</td><td>${s && s.em ? s.eg+'/'+s.ea : '–'}</td><td>${s && s.tp ? s.tp.toFixed(1) : '–'}</td><td>${v==null ? (y<2012 ? 'no data' : '–') : m(v)}</td></tr>`; }).join('');
   const notes = [];
-  if (p.covered < p.seasons.length) notes.push(`${p.seasons.length - p.covered} season(s) before 2012/13 have no match data and are credited at his average.`);
+  const pnGroups = {};
+  p.seasons.forEach(y => { const n = p.per_season[y] && p.per_season[y].pn; if (n) (pnGroups[n] = pnGroups[n] || []).push(yr(y)); });
+  Object.entries(pnGroups).forEach(([n, ys]) => notes.push(`† ${ys.join(', ')}: ${n.charAt(0).toUpperCase() + n.slice(1)}.`));
+  if (p.covered < p.seasons.length) notes.push(`${p.seasons.length - p.covered} season(s) have no match data and are credited at his average.`);
   if (p.ongoing) notes.push('Still at the club: his current market value counts as money back.');
   if (p.source === 'curated') notes.push(`Fee entered by hand (confidence: ${p.confidence}).`);
   if (q.decision_note) notes.push(`At signing the two views disagreed (${q.decision_note}), so the decision counts as fair.`);
@@ -363,9 +366,10 @@ function drawMethod(){
     <h2 style="margin-bottom:14px">How it works</h2>
     <h3>Money</h3><p>Fees from different years are put on one scale. <b>Today's football €</b> uses the average value of the 200 most valuable top-five-league players (prices rose about ${(1/IX.find(r => r.season===2010).football).toFixed(1)}× from 2010/11 to 2025/26); <b>consumer prices</b> uses euro-area inflation; <b>actual €</b> applies no adjustment.</p>
     <h3>Performance</h3><p>Each season from 2012/13 is scored against players in the same role: goals and assists per 90, share of team minutes, team points with and without him, goals conceded while he plays, plus Champions League and Europa League output. Trophies count extra: Champions League 3 points, league 2, cups 1, super cups 0.5, scaled by how much he played and contributed.</p>
+    <h3>Data checks</h3><p>Every signing's La Liga and Champions League numbers were checked season by season against StatMuse. The dataset has no appearances before 2012/13, so 2010/11 and 2011/12 (Villa, Mascherano, Adriano, Afellay, Alexis, Fàbregas) use StatMuse stats, scored against 2012/13 players in the same role, with La Liga and Champions League titles credited the same way. Three 2020/21 seasons missing from the dataset (Alba, ter Stegen, de Jong) and three goal counts were fixed too. Assists aren't changed: Transfermarkt counts them more generously than StatMuse, and every player is measured on the same definition.</p>
     <h3>Value</h3><p>A linear regression on ${S.market_model.n.toLocaleString()} La Liga player-seasons (R² ${S.market_model.r2.toFixed(2)}) prices each season's output. Fair fee = that value × ${S.market_premium.toFixed(2)}, the usual premium clubs pay over valuations.</p>
     <h3>Deal balance</h3><p>Performance value (each season credited with 1/${S.use_seasons} of its fair fee, priced at age 27) + money back (sale fee, loan fees, or current value if still at the club) − fee. A fair-priced player who plays five seasons at that level and leaves for free comes out at €0. Verdicts are profit or loss only when the whole 80% range sits on one side of zero.</p>
-    <h3>Limitations</h3><p>Box-score data misses build-up and pressing work. 2010–12 seasons have no match data. ${P.filter(p => p.source==='curated').length} of Barça's fees were entered by hand, and wages are partly estimated from Capology payrolls.</p>
+    <h3>Limitations</h3><p>Box-score data misses build-up and pressing work. Seasons rebuilt from StatMuse have no line-ups, so points with/without him count as neutral. Cup trophies in 2010–12 aren't credited. ${P.filter(p => p.source==='curated').length} of Barça's fees were entered by hand, and wages are partly estimated from Capology payrolls.</p>
   </section>`;
 }
 

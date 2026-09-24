@@ -1,0 +1,4 @@
+player_id,player,club_id,season,league,field,value,dataset_value,source
+44352,Luis Suárez,131,2018,ES1,goals,21,19,StatMuse
+80444,Philippe Coutinho,131,2017,ES1,goals,8,7,StatMuse
+32467,Ivan Rakitic,131,2016,ES1,goals,8,7,StatMuse

@@ -68,7 +68,7 @@ for y in (2010, 2013, 2017):
 
 md("""## 2. The signings
 
-59 paid signings. 45 come straight from the dataset; 15 (mostly 2010–2017 players whose later careers left the tracked leagues) come from `data/curated/missing_signings.csv`, including one multi-stage deal (Emerson Royal) merged into a single row. League appearance data starts in **2012/13**. Villa, Adriano, Mascherano, Afellay, Alexis and Fàbregas have their 2010–12 seasons credited at their covered-season average (`partial_data`).""")
+59 paid signings. 45 come straight from the dataset; 15 (mostly 2010–2017 players whose later careers left the tracked leagues) come from `data/curated/missing_signings.csv`, including one multi-stage deal (Emerson Royal) merged into a single row. League appearance data starts in **2012/13**. For Villa, Adriano, Mascherano, Afellay, Alexis and Fàbregas, the 2010/11 and 2011/12 seasons use hand-checked StatMuse stats (`data/curated/season_stats_statmuse.csv`), scored against 2012/13 players in the same role, with La Liga and Champions League titles credited from Barça's team totals (`team_seasons_statmuse.csv`). Every signing's La Liga and Champions League seasons were checked against StatMuse: three 2020/21 seasons missing from the dataset (Alba, ter Stegen, de Jong) were added and three goal counts corrected (`stat_corrections.csv`); see `src/patches.py`.""")
 code("""d[['player','group','signing_season','from_club','fee_eur','fee_adj','seasons','seasons_covered','exit_to','ongoing','source']] \\
   .assign(fee_eur=lambda x: x.fee_eur/1e6).round(1).sort_values('signing_season')""")
 

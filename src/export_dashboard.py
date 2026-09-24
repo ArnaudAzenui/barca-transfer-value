@@ -44,6 +44,16 @@ LEAGUE_NAMES = {"ES1": "La Liga", "GB1": "Premier League", "IT1": "Serie A", "L1
                 "SC1": "Scottish Premiership", "DK1": "Danish Superliga"}
 
 
+def _patch_note(s):
+    """Where a season's stats come from, when not straight from the dataset."""
+    if not bool(s.get("patched", False)) and not s.get("patch_note"):
+        return ""
+    base = ("stats from StatMuse, compared with 2012/13 players in his role (no dataset coverage before 2012/13)" if bool(s.get("reconstructed", False))
+            else "stats from StatMuse (season missing from the dataset)" if bool(s.get("patched", False)) else "")
+    note = (s.get("patch_note") or "").replace(" from his other Barça seasons", " from his assist rate in other seasons")
+    return "; ".join(x for x in [base, note] if x)
+
+
 def export():
     global PREM
     PREM = market_premium()
@@ -60,8 +70,9 @@ def export():
         for y in seasons:
             if (x["player_id"], y) in b.index:
                 s = b.loc[(x["player_id"], y)]
-                per_season[y] = dict(lm=int(s["minutes"]), lg=int(s["goals"]), la=int(s["assists"]), ls=r(s["score"]),
-                                     em=int(s["eu_minutes"]), eg=int(s["eu_goals"]), ea=int(s["eu_assists"]),
+                per_season[y] = dict(lm=int(s["minutes"]), lg=int(s["goals"]), la=int(round(s["assists"])), ls=r(s["score"]),
+                                     em=int(s["eu_minutes"]), eg=int(s["eu_goals"]), ea=int(round(s["eu_assists"])),
+                                     pn=_patch_note(s),
                                      es=r(s["eu_score"]), comp=s["eu_comps"] if isinstance(s["eu_comps"], str) else "",
                                      tp=r(s["trophy_pts"]), tr=s["trophies"])
         players.append(dict(
@@ -70,8 +81,8 @@ def export():
             ongoing=bool(x["ongoing"]), exit_to=x["exit_to"] if isinstance(x["exit_to"], str) else None,
             fee_nom=r(x["fee_eur"] / 1e6), sale_nom=r(x["sale_fee_eur"] / 1e6), wage_src=x["wage_source"],
             seasons=seasons, covered=int(x["seasons_covered"]),
-            minutes=int(x["liga_minutes"]), goals=int(x["liga_goals"]), assists=int(x["liga_assists"]),
-            eu_minutes=int(x["eu_minutes"]), eu_goals=int(x["eu_goals"]), eu_assists=int(x["eu_assists"]),
+            minutes=int(x["liga_minutes"]), goals=int(x["liga_goals"]), assists=int(round(x["liga_assists"])),
+            eu_minutes=int(x["eu_minutes"]), eu_goals=int(x["eu_goals"]), eu_assists=int(round(x["eu_assists"])),
             avg_score=r(x["avg_score"]), avg_eu_score=r(x["avg_eu_score"]), trophy_pts=r(x["trophy_pts"]),
             per_season=per_season, source=x["source"], confidence=x["confidence"],
             pre_seasons=x["pre_seasons"] if isinstance(x["pre_seasons"], str) else None,

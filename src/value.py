@@ -18,7 +18,9 @@ def add_performance(s: pd.DataFrame, scored: pd.DataFrame, club_id: int = BARCA_
         eu_per, eu_mins, eu_goals, eu_assists, cl_mins = [], 0, 0, 0, 0
         tpts, tlist = 0.0, []
         # a season counts as covered when line-up data exists for at least half of the club's league games
-        covered = [y for y in r["barca_seasons"] if y >= FIRST_COVERED and cov.get(y, 0) >= 0.5]
+        # ... or when a hand-checked (StatMuse) season exists for him, e.g. 2010/11-2011/12
+        covered = [y for y in r["barca_seasons"] if (y >= FIRST_COVERED and cov.get(y, 0) >= 0.5)
+                   or (r["player_id"], y) in b.index]
         for y in covered:
             if (r["player_id"], y) in b.index:
                 x = b.loc[(r["player_id"], y)]
@@ -77,7 +79,8 @@ def add_piv(s: pd.DataFrame, scored: pd.DataFrame, market_model, premium: float 
     out = []
     for _, r in s.iterrows():
         rows = []
-        for y in [y for y in r["barca_seasons"] if y >= FIRST_COVERED and cov.get(y, 0) >= 0.5]:
+        for y in [y for y in r["barca_seasons"] if (y >= FIRST_COVERED and cov.get(y, 0) >= 0.5)
+                  or (r["player_id"], y) in b.index]:
             if (r["player_id"], y) in b.index:
                 rows.append(b.loc[(r["player_id"], y)].to_dict() | {"season": y})
             else:   # on the books but no league minutes

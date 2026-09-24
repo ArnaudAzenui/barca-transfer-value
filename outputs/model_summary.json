@@ -14,13 +14,13 @@
     },
     "market_premium": 1.25,
     "use_seasons": 5,
-    "trophy_beta": 0.1521,
+    "trophy_beta": 0.1519,
     "trophy_beta_se": 0.0337,
     "club_model": {
       "n": 59,
-      "r2": 0.224,
-      "intercept_m": 42.34,
-      "slope": 0.188
+      "r2": 0.248,
+      "intercept_m": 40.68,
+      "slope": 0.196
     },
     "n_signings": 59,
     "clubs": {
@@ -28,16 +28,16 @@
         "signings": 59,
         "spent_m": 3043.7,
         "recovered_m": 1710.5,
-        "perf_value_m": 2525.9,
-        "total_balance_m": 1192.7,
-        "wages_m": 2769.4,
-        "return_per_eur_total_cost": 0.729,
-        "balance_per_eur": 0.392,
-        "median_balance_m": 5.5,
+        "perf_value_m": 2584.5,
+        "total_balance_m": 1251.3,
+        "wages_m": 2787.7,
+        "return_per_eur_total_cost": 0.737,
+        "balance_per_eur": 0.411,
+        "median_balance_m": 6.4,
         "good_share": 0.441,
-        "bad_share": 0.203,
+        "bad_share": 0.186,
         "big_money": 16,
-        "big_money_bad": 7,
+        "big_money_bad": 6,
         "decisions_rated": 59,
         "overpaid_at_signing_share": 0.068,
         "median_fee_to_fair_at_signing": 1.449,
@@ -47,11 +47,11 @@
         "signings": 56,
         "spent_m": 2742.1,
         "recovered_m": 1728.8,
-        "perf_value_m": 2635.3,
-        "total_balance_m": 1622.0,
+        "perf_value_m": 2634.9,
+        "total_balance_m": 1621.6,
         "wages_m": 3064.9,
-        "return_per_eur_total_cost": 0.752,
-        "balance_per_eur": 0.592,
+        "return_per_eur_total_cost": 0.751,
+        "balance_per_eur": 0.591,
         "median_balance_m": 8.0,
         "good_share": 0.536,
         "bad_share": 0.25,
@@ -66,11 +66,11 @@
         "signings": 80,
         "spent_m": 2244.7,
         "recovered_m": 1680.6,
-        "perf_value_m": 2049.3,
-        "total_balance_m": 1485.1,
+        "perf_value_m": 2048.9,
+        "total_balance_m": 1484.8,
         "wages_m": 2066.2,
         "return_per_eur_total_cost": 0.865,
-        "balance_per_eur": 0.662,
+        "balance_per_eur": 0.661,
         "median_balance_m": 7.6,
         "good_share": 0.562,
         "bad_share": 0.113,
@@ -87,8 +87,8 @@
         "signings": 71,
         "spent_m": 1953.0,
         "recovered_m": 1352.6,
-        "perf_value_m": 1497.4,
-        "total_balance_m": 896.9,
+        "perf_value_m": 1497.1,
+        "total_balance_m": 896.6,
         "wages_m": 1437.2,
         "return_per_eur_total_cost": 0.841,
         "balance_per_eur": 0.459,
@@ -106,11 +106,11 @@
         "signings": 51,
         "spent_m": 2535.3,
         "recovered_m": 1503.3,
-        "perf_value_m": 2041.6,
-        "total_balance_m": 1009.6,
-        "wages_m": 2024.2,
-        "return_per_eur_total_cost": 0.777,
-        "balance_per_eur": 0.398,
+        "perf_value_m": 2073.8,
+        "total_balance_m": 1041.8,
+        "wages_m": 2026.3,
+        "return_per_eur_total_cost": 0.784,
+        "balance_per_eur": 0.411,
         "median_balance_m": 4.8,
         "good_share": 0.451,
         "bad_share": 0.196,
@@ -125,8 +125,8 @@
         "signings": 46,
         "spent_m": 2225.8,
         "recovered_m": 1298.0,
-        "perf_value_m": 2156.7,
-        "total_balance_m": 1228.9,
+        "perf_value_m": 2156.4,
+        "total_balance_m": 1228.6,
         "wages_m": 2195.7,
         "return_per_eur_total_cost": 0.781,
         "balance_per_eur": 0.552,
@@ -167,12 +167,12 @@
           "premium_pct": 31.8,
           "ci_pct": [
             -2.8,
-            78.6
+            78.7
           ],
           "p": 0.075
         },
         "Real Madrid": {
-          "premium_pct": -8.9,
+          "premium_pct": -8.8,
           "ci_pct": [
             -35.9,
             29.5
@@ -203,9 +203,9 @@
       },
       {
         "season": 2020,
-        "n": 19,
-        "corr_log": 0.751,
-        "median_abs_pct_err": 31.4
+        "n": 22,
+        "corr_log": 0.703,
+        "median_abs_pct_err": 34.1
       }
     ]
   },
@@ -225,13 +225,13 @@
       },
       "market_premium": 1.25,
       "use_seasons": 5,
-      "trophy_beta": 0.1521,
+      "trophy_beta": 0.1519,
       "trophy_beta_se": 0.0337,
       "club_model": {
         "n": 59,
-        "r2": 0.224,
-        "intercept_m": 42.34,
-        "slope": 0.188
+        "r2": 0.248,
+        "intercept_m": 40.68,
+        "slope": 0.196
       },
       "n_signings": 59,
       "clubs": {
@@ -239,16 +239,16 @@
           "signings": 59,
           "spent_m": 3043.7,
           "recovered_m": 1710.5,
-          "perf_value_m": 2525.9,
-          "total_balance_m": 1192.7,
-          "wages_m": 2769.4,
-          "return_per_eur_total_cost": 0.729,
-          "balance_per_eur": 0.392,
-          "median_balance_m": 5.5,
+          "perf_value_m": 2584.5,
+          "total_balance_m": 1251.3,
+          "wages_m": 2787.7,
+          "return_per_eur_total_cost": 0.737,
+          "balance_per_eur": 0.411,
+          "median_balance_m": 6.4,
           "good_share": 0.441,
-          "bad_share": 0.203,
+          "bad_share": 0.186,
           "big_money": 16,
-          "big_money_bad": 7,
+          "big_money_bad": 6,
           "decisions_rated": 59,
           "overpaid_at_signing_share": 0.068,
           "median_fee_to_fair_at_signing": 1.449,
@@ -258,11 +258,11 @@
           "signings": 56,
           "spent_m": 2742.1,
           "recovered_m": 1728.8,
-          "perf_value_m": 2635.3,
-          "total_balance_m": 1622.0,
+          "perf_value_m": 2634.9,
+          "total_balance_m": 1621.6,
           "wages_m": 3064.9,
-          "return_per_eur_total_cost": 0.752,
-          "balance_per_eur": 0.592,
+          "return_per_eur_total_cost": 0.751,
+          "balance_per_eur": 0.591,
           "median_balance_m": 8.0,
           "good_share": 0.536,
           "bad_share": 0.25,
@@ -277,11 +277,11 @@
           "signings": 80,
           "spent_m": 2244.7,
           "recovered_m": 1680.6,
-          "perf_value_m": 2049.3,
-          "total_balance_m": 1485.1,
+          "perf_value_m": 2048.9,
+          "total_balance_m": 1484.8,
           "wages_m": 2066.2,
           "return_per_eur_total_cost": 0.865,
-          "balance_per_eur": 0.662,
+          "balance_per_eur": 0.661,
           "median_balance_m": 7.6,
           "good_share": 0.562,
           "bad_share": 0.113,
@@ -298,8 +298,8 @@
           "signings": 71,
           "spent_m": 1953.0,
           "recovered_m": 1352.6,
-          "perf_value_m": 1497.4,
-          "total_balance_m": 896.9,
+          "perf_value_m": 1497.1,
+          "total_balance_m": 896.6,
           "wages_m": 1437.2,
           "return_per_eur_total_cost": 0.841,
           "balance_per_eur": 0.459,
@@ -317,11 +317,11 @@
           "signings": 51,
           "spent_m": 2535.3,
           "recovered_m": 1503.3,
-          "perf_value_m": 2041.6,
-          "total_balance_m": 1009.6,
-          "wages_m": 2024.2,
-          "return_per_eur_total_cost": 0.777,
-          "balance_per_eur": 0.398,
+          "perf_value_m": 2073.8,
+          "total_balance_m": 1041.8,
+          "wages_m": 2026.3,
+          "return_per_eur_total_cost": 0.784,
+          "balance_per_eur": 0.411,
           "median_balance_m": 4.8,
           "good_share": 0.451,
           "bad_share": 0.196,
@@ -336,8 +336,8 @@
           "signings": 46,
           "spent_m": 2225.8,
           "recovered_m": 1298.0,
-          "perf_value_m": 2156.7,
-          "total_balance_m": 1228.9,
+          "perf_value_m": 2156.4,
+          "total_balance_m": 1228.6,
           "wages_m": 2195.7,
           "return_per_eur_total_cost": 0.781,
           "balance_per_eur": 0.552,
@@ -378,12 +378,12 @@
             "premium_pct": 31.8,
             "ci_pct": [
               -2.8,
-              78.6
+              78.7
             ],
             "p": 0.075
           },
           "Real Madrid": {
-            "premium_pct": -8.9,
+            "premium_pct": -8.8,
             "ci_pct": [
               -35.9,
               29.5
@@ -414,9 +414,9 @@
         },
         {
           "season": 2020,
-          "n": 19,
-          "corr_log": 0.751,
-          "median_abs_pct_err": 31.4
+          "n": 22,
+          "corr_log": 0.703,
+          "median_abs_pct_err": 34.1
         }
       ]
     },
@@ -435,13 +435,13 @@
       },
       "market_premium": 1.25,
       "use_seasons": 5,
-      "trophy_beta": 0.1014,
+      "trophy_beta": 0.1012,
       "trophy_beta_se": 0.0339,
       "club_model": {
         "n": 59,
-        "r2": 0.063,
-        "intercept_m": 37.02,
-        "slope": 0.114
+        "r2": 0.074,
+        "intercept_m": 36.1,
+        "slope": 0.122
       }
     },
     "nominal": {
@@ -459,13 +459,13 @@
       },
       "market_premium": 1.25,
       "use_seasons": 5,
-      "trophy_beta": 0.0796,
+      "trophy_beta": 0.0794,
       "trophy_beta_se": 0.0345,
       "club_model": {
         "n": 59,
-        "r2": 0.056,
-        "intercept_m": 29.36,
-        "slope": 0.106
+        "r2": 0.066,
+        "intercept_m": 28.64,
+        "slope": 0.114
       }
     }
   }

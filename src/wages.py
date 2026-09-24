@@ -42,6 +42,12 @@ def _season_values():
     return both.drop_duplicates(["player_id", "season"])[["player_id", "season", "mv"]]
 
 
+def _squads(scored):
+    """La Liga squads; reconstructed pre-2012 seasons are only a handful of signings, not a squad."""
+    s = scored[scored["league"] == "ES1"]
+    return s[~s["reconstructed"].astype(bool)] if "reconstructed" in s else s
+
+
 def actual_salaries(scored: pd.DataFrame) -> pd.DataFrame:
     """All Capology player salaries matched to dataset player_ids (by name within the club's squad that season)."""
     files = ["capology_salaries_barca_history.csv", "capology_salaries_2026_27.csv"]
@@ -50,7 +56,7 @@ def actual_salaries(scored: pd.DataFrame) -> pd.DataFrame:
     sal["k"] = sal["player"].map(_norm)
     names = load("players")[["player_id", "name", "current_club_id", "date_of_birth"]].copy()
     names["k"] = names["name"].map(_norm)
-    squads = scored[scored["league"] == "ES1"][["club_id", "season", "player_id"]].drop_duplicates()
+    squads = _squads(scored)[["club_id", "season", "player_id"]].drop_duplicates()
     out = []
     for _, r in sal.iterrows():
         cand = names[names["k"] == r["k"]]
@@ -82,7 +88,8 @@ def _split(scored, fit):
     b_mv, b_age = fit.params["lmv"], fit.params["age"]
     pay = pd.read_csv(CURATED / "capology_payrolls.csv")
     pay["club_id"] = pay["club"].map(CLUB_IDS)
-    sq = scored[scored["club_id"].isin(CLUB_IDS.values()) & (scored["league"] == "ES1")][
+    sq = _squads(scored)
+    sq = sq[sq["club_id"].isin(CLUB_IDS.values())][
         ["club_id", "season", "player_id", "date_of_birth"]].copy()
     sq = sq.merge(_season_values(), on=["player_id", "season"], how="left")
     sq["mv"] = sq["mv"].fillna(sq.groupby(["club_id", "season"])["mv"].transform("median")).clip(lower=1e5)
@@ -120,8 +127,9 @@ def payroll_shares(scored: pd.DataFrame) -> pd.DataFrame:
     sq = sq.merge(act[["club_id", "season", "player_id", "actual_wage_eur"]], on=["club_id", "season", "player_id"], how="left")
     # player-specific correction from seasons where his actual salary is known
     known = sq.dropna(subset=["actual_wage_eur"])
-    ratio = np.exp((np.log(known["actual_wage_eur"]) - np.log(known["est_wage_eur"])).groupby(
-        [known["club_id"], known["player_id"]]).mean()).rename("ratio").reset_index()
+    lr = (np.log(known["actual_wage_eur"]) - np.log(known["est_wage_eur"])).groupby([known["club_id"], known["player_id"]])
+    # one salary year is too thin to rescale a whole spell (e.g. de Jong's deferred 2020/21 wage): need two or more
+    ratio = np.exp(lr.mean()[lr.size() >= 2]).rename("ratio").reset_index()
     sq = sq.merge(ratio, on=["club_id", "player_id"], how="left")
     sq["wage_eur"] = np.where(sq["actual_wage_eur"].notna(), sq["actual_wage_eur"],
                               sq["est_wage_eur"] * sq["ratio"].fillna(1.0))

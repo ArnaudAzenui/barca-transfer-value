@@ -69,6 +69,34 @@ def europe_seasons() -> pd.DataFrame:
     return out
 
 
+def cl_norms() -> dict:
+    """(season, group, metric) -> (mean, sd) of Champions League peers, for scoring patched seasons."""
+    g = load("games")[["game_id", "season", "competition_id"]]
+    g = g[g["competition_id"] == "CL"]
+    a = load("appearances").merge(g[["game_id", "season"]], on="game_id")
+    tg = cl_team_games()
+    ps = a.groupby(["player_id", "player_club_id", "season"]).agg(m=("minutes_played", "sum"), g=("goals", "sum"),
+                                                                   a=("assists", "sum")).reset_index()
+    ps["games"] = [tg.get((c, s), np.nan) for c, s in zip(ps["player_club_id"], ps["season"])]
+    pl = load("players")[["player_id", "position", "sub_position"]]
+    ps = ps.merge(pl, on="player_id", how="left")
+    ps["group"] = ps["sub_position"].map(SUBPOS_TO_GROUP).fillna(ps["position"].map(POSITION_TO_GROUP))
+    ps = ps[ps["m"] >= MIN_PEER]
+    ps["g90"], ps["a90"], ps["mins"] = ps["g"] / ps["m"] * 90, ps["a"] / ps["m"] * 90, ps["m"] / (ps["games"] * 90)
+    out = {}
+    for (s, grp), x in ps.groupby(["season", "group"]):
+        for k in EU_METRICS:
+            out[(int(s), grp, k)] = (float(x[k].mean()), float(x[k].std()))
+    return out
+
+
+def cl_team_games() -> dict:
+    g = load("games")[["game_id", "season", "competition_id", "home_club_id", "away_club_id"]]
+    g = g[g["competition_id"] == "CL"]
+    t = pd.concat([g.rename(columns={"home_club_id": "club_id"}), g.rename(columns={"away_club_id": "club_id"})])
+    return t.groupby(["club_id", "season"])["game_id"].nunique().to_dict()
+
+
 def team_in_europe() -> pd.DataFrame:
     """(club, season) pairs that played CL or EL group/knockout games, with the competition level."""
     g = load("games")[["season", "competition_id", "home_club_id", "away_club_id"]]
@@ -107,4 +135,5 @@ def add_europe(scored: pd.DataFrame) -> pd.DataFrame:
         tot = sum(ws.values()) or 1
         return sum(ws[k] * r[f"eu_z_{k}"] for k in EU_METRICS) / tot
     d["eu_score"] = d.apply(eu_score, axis=1)
-    return d
+    from .patches import apply_europe
+    return apply_europe(d, cl_norms(), ROLE_WEIGHTS)   # Champions League stats for patched seasons

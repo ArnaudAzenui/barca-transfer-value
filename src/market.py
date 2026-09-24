@@ -58,6 +58,8 @@ def fit_market(scored: pd.DataFrame, index_df, leagues=("ES1",)):
     if leagues is not None:
         d = d[d["league"].isin(leagues)]
     d = d[(d["minutes"] > 0) & d["age"].between(16, 42) & d["group"].notna()]
+    if "patched" in d:
+        d = d[~d["patched"].astype(bool)]   # hand-checked seasons are valued, never used to fit
     d["log_mv"] = np.log(d["mv_adj"])
     f = FORMULA if d["league"].nunique() > 1 else FORMULA.replace("C(league) + ", "")
     model = smf.ols(f, data=d).fit()
