@@ -108,6 +108,9 @@ td{padding:8px;border-bottom:1px solid var(--hair);white-space:nowrap}
 .method h4{margin:0;font:600 14px var(--body)}
 @media (max-width:800px){.method{grid-template-columns:1fr}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
 footer{color:var(--muted);font-size:12.5px}
+.byline{font:500 13px var(--mono);letter-spacing:.04em;color:var(--muted)}
+.byline b{color:var(--ink);font-weight:600}
+.byline a,footer a{color:inherit;text-underline-offset:3px}
 .ctrl-row{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
 .ctrl-row .lab{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .money-note{font-size:13px;color:var(--ink-2);background:var(--ground);border-radius:8px;padding:8px 12px;margin-top:12px}
@@ -125,6 +128,7 @@ footer{color:var(--muted);font-size:12.5px}
   <header>
     <div class="eyebrow">FC Barcelona · paid signings · 2010/11 – 2025/26 · La Liga + Champions League + Europa League</div>
     <h1>Worth the fee<em>?</em></h1>
+    <div class="byline">By <b>Arnaud Azenui</b></div>
     <p class="lede">Every player Barça paid a transfer fee for since 2010, judged on what he did at the club (measured against players in the same role, with extra credit for trophies he helped win) and on the money Barça got back when he left. It also asks whether each fee was reasonable at the moment of signing, and how Barça's record compares with Real Madrid's and Atlético's. Switch the money basis to see how much inflation changes the story.</p>
   </header>
 
@@ -187,7 +191,7 @@ footer{color:var(--muted);font-size:12.5px}
     </div>
     <p class="note" style="margin-top:16px">Money: <b>Today's football €</b> uses the average value of the 200 most valuable top-five-league players (prices roughly tripled from 2010 to 2025). <b>Consumer prices</b> uses approximate euro-area HICP inflation. <b>Actual €</b> applies no adjustment. The football index fits the data best: the total-cost model explains <span id="m-r2c"></span> of the variation with it, against <span id="m-r2n"></span> in actual euros. Limitations: box-score data misses build-up and pressing work, 2010–12 seasons have no appearance data, and wages come from Capology: actual player salaries for Barça in 2017/18, 2018/19 and 2020/21; otherwise each club's payroll for the season, split across the squad by market value and age. Source: transfermarkt-datasets (snapshot to July 2026), Capology payrolls, and hand-curated fees for early deals missing from the dataset.</p>
   </section>
-  <footer>Built with Python (pandas, statsmodels). Code and notebook are in the <span style="font-family:var(--mono)">barca-transfer-value</span> project.</footer>
+  <footer>Built by <b style="color:var(--ink-2)">Arnaud Azenui</b> · <a href="https://github.com/ArnaudAzenui" target="_blank" rel="noopener">github.com/ArnaudAzenui</a><br>Made with Python (pandas, statsmodels). Code and notebook are in the <span style="font-family:var(--mono)">barca-transfer-value</span> project.</footer>
 </div>
 
 <script>
